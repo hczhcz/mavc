@@ -53,3 +53,19 @@ class BaseDataType(object):
             return set(self._DoRef())
         else:
             info.Log.InternalError('Can not read identifier from restored data')
+
+    # Return a set like Ref() and do recursion call
+    def AllRef(self):
+        Result = set()
+
+        def AppendRef(item):
+            if not item in Result:
+                Result.add(item)
+                Ref = info.Database.Pull(item, False).Ref()
+                for refitem in Ref:
+                    AppendRef(refitem)
+
+        for item in self.Ref():
+            AppendRef(item)
+
+        return Result
