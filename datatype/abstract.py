@@ -1,10 +1,10 @@
 import mavc.info as info
-import mavc.interface as interface
+from storable import *
 
 # Raw data
 # Can store almost anything
 # For debug only
-class RawDataType(interface.BaseDataType):
+class RawDataType(StorableDataType):
     _Data = None
 
     def __init__(self, data):
@@ -26,7 +26,7 @@ class RawDataType(interface.BaseDataType):
 
 # Data with comment
 # Comment should be string
-class CommentDataType(interface.BaseDataType):
+class CommentDataType(StorableDataType):
     _Comment = ''
 
     # As string, return comment
@@ -44,14 +44,14 @@ class CommentDataType(interface.BaseDataType):
 
 # Unique list (set) of identifier
 # Check type of input data
-class SetDataType(interface.BaseDataType):
+class SetDataType(StorableDataType):
     _Data = set()
     _IDData = set()
 
     def _SetData(self, data):
         if isinstance(data, set):
             for item in data:
-                if not isinstance(item, interface.BaseDataType):
+                if not isinstance(item, StorableDataType):
                     info.Log.InternalError('Wrong identifier in the set')
             self._Data = data
         else:
@@ -75,14 +75,14 @@ class SetDataType(interface.BaseDataType):
 
 # Ordered list of identifier
 # Check type of input data
-class ListDataType(interface.BaseDataType):
+class ListDataType(StorableDataType):
     _Data = list()
     _IDData = list()
 
     def _SetData(self, data):
         if isinstance(data, list):
             for item in data:
-                if not isinstance(item, interface.BaseDataType):
+                if not isinstance(item, StorableDataType):
                     info.Log.InternalError('Wrong identifier in the list')
             self._Data = data
         else:
@@ -106,7 +106,7 @@ class ListDataType(interface.BaseDataType):
 
 # Dir or file
 # Do IO when calling _DoOnPush() or _DoOnPull()
-class DirFileDataType(interface.BaseDataType):
+class DirFileDataType(StorableDataType):
     _Target = ''
 
     def _SetTarget(self, target):
