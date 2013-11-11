@@ -1,4 +1,5 @@
 import os
+import fcntl
 import mavc.info as info
 from abstract import *
 
@@ -66,6 +67,7 @@ class FileDataType(DirFileDataType):
 
         try:
             with open(FromFile, 'rb') as File:
+                fcntl.flock(File, fcntl.LOCK_EX)
                 self._FileData = File.read()
         except:
             info.Log.Error('Can not open file ' + FromFile)
@@ -80,6 +82,7 @@ class FileDataType(DirFileDataType):
             # Check if the data is the same
             try:
                 with open(ToFile, 'rb') as File:
+                    fcntl.flock(File, fcntl.LOCK_EX)
                     if File.read() == self._FileData:
                         info.Log.Message('File already exist ' + ToFile)
                         NeedBak = False
@@ -109,6 +112,7 @@ class FileDataType(DirFileDataType):
                 if not os.path.exists(OutDir):
                     os.mkdir(OutDir)
                 with open(info.OutputDir + ToFile, 'wb') as File:
+                    fcntl.flock(File, fcntl.LOCK_EX)
                     File.write(self._FileData)
             except:
                 info.Log.Error('Can not write output buffer ' + ToFile)

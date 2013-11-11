@@ -1,4 +1,5 @@
 import os
+import fcntl
 import cPickle as pickle
 import zlib
 import mavc.info as info
@@ -48,6 +49,7 @@ class FileDB(interface.BaseDB):
             # Check if the data is the same
             try:
                 with open(info.StoreDir + FileName, 'rb') as File:
+                    fcntl.flock(File, fcntl.LOCK_EX)
                     if File.read() == StrFileData:
                         info.Log.Message('Database file already exist '\
                             + FileName)
@@ -60,6 +62,7 @@ class FileDB(interface.BaseDB):
             # Write to temporary file
             try:
                 with open(info.StoreDir + TempFileName, 'wb') as File:
+                    fcntl.flock(File, fcntl.LOCK_EX)
                     File.write(StrFileData)
             except:
                 info.Log.Error('Can not write temporary file ' + TempFileName)
@@ -87,6 +90,7 @@ class FileDB(interface.BaseDB):
 
         try:
             with open(info.StoreDir + id, 'rb') as File:
+                fcntl.flock(File, fcntl.LOCK_EX)
                 StrFileData = File.read()
         except:
             info.Log.Error('Can not open database file ' + id)
