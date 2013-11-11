@@ -79,8 +79,8 @@ class FileDB(interface.BaseDB):
 
     def Pull(self, id, doaction = True):
         # Checking
-        if not isinstance(id, str):
-            info.Log.InternalError('Identifier must be string')
+        if not isinstance(id, str) or not info.IsDirFile(id):
+            info.Log.InternalError('Bad identifier')
 
         # Read from file
         if not os.path.isfile(info.StoreDir + id):

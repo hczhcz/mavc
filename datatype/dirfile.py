@@ -11,17 +11,17 @@ class DirDataType(DirFileDataType, SetDataType):
 
     def _DoOnPush(self):
         OldDir = info.WorkingDir
-        NewDir = OldDir + self._Target + os.sep
+        NewDir = OldDir + self.Target() + os.sep
 
         # Check dir
-        if os.path.exists(NewDir):
+        if os.path.isdir(NewDir):
             info.Log.Message('Dir checked ' + NewDir)
         else:
             info.Log.Error('Dir not exist ' + NewDir)
 
         # With new dir do push
         try:
-            info.WorkingDir = OldDir + self._Target + os.sep
+            info.WorkingDir = OldDir + self.Target() + os.sep
             super(DirDataType, self)._DoOnPush()
         except:
             raise
@@ -30,10 +30,10 @@ class DirDataType(DirFileDataType, SetDataType):
 
     def _DoOnPull(self):
         OldDir = info.WorkingDir
-        NewDir = OldDir + self._Target + os.sep
+        NewDir = OldDir + self.Target() + os.sep
 
         # Make dir if necessary
-        if os.path.exists(NewDir):
+        if os.path.isdir(NewDir):
             info.Log.Message('Dir already exist ' + NewDir)
         else:
             try:
@@ -59,7 +59,7 @@ class FileDataType(DirFileDataType):
         self._SetTarget(file)
 
     def _DoOnPush(self):
-        FromFile = info.WorkingDir + self._Target
+        FromFile = info.WorkingDir + self.Target()
 
         # Read from file
         if not os.path.isfile(FromFile):
@@ -73,7 +73,7 @@ class FileDataType(DirFileDataType):
             info.Log.Error('Can not open file ' + FromFile)
 
     def _DoOnPull(self):
-        ToFile = info.WorkingDir + self._Target
+        ToFile = info.WorkingDir + self.Target()
         OutDir = info.OutputDir + info.WorkingDir
         BakDir = info.BackupDir + info.WorkingDir
 
@@ -100,7 +100,7 @@ class FileDataType(DirFileDataType):
         # Do backup
         if NeedBak:
             try:
-                if not os.path.exists(BakDir):
+                if not os.path.isdir(BakDir):
                     os.mkdir(BakDir)
                 os.rename(ToFile, info.BackupDir + ToFile)
             except:
@@ -109,7 +109,7 @@ class FileDataType(DirFileDataType):
         if NeedWrite:
             # Write to buffer file
             try:
-                if not os.path.exists(OutDir):
+                if not os.path.isdir(OutDir):
                     os.mkdir(OutDir)
                 with open(info.OutputDir + ToFile, 'wb') as File:
                     fcntl.flock(File, fcntl.LOCK_EX)

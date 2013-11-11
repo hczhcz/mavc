@@ -3,7 +3,7 @@ import mavc.info as info
 
 # Check tool dir and initialize if necessary
 def _EnsureDir(dir):
-    if not os.path.exists(dir):
+    if not os.path.isdir(dir):
         info.Log.Hint('Tool dir need to create ' + dir)
         try:
             os.mkdir(dir)

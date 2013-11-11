@@ -1,3 +1,4 @@
+import os
 import datetime
 
 # Do not change if database is already created
@@ -22,3 +23,6 @@ CompressLevel = 6
 
 # Format of time, ISO by default
 TimeInFormat = lambda: datetime.datetime.now().isoformat()
+
+# Check file and dir name
+IsDirFile = lambda x: not set(x) <= {'.', '*', '?', '+'} and not os.sep in x

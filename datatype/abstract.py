@@ -1,3 +1,4 @@
+import os
 import mavc.info as info
 from storable import *
 
@@ -109,11 +110,17 @@ class ListDataType(StorableDataType):
 class DirFileDataType(StorableDataType):
     _Target = ''
 
+    def _CheckPath(self):
+        if not info.IsDirFile(self._Target):
+            info.Log.InternalError('Bad path')
+
     def _SetTarget(self, target):
         if isinstance(target, str):
             self._Target = target
+            self._CheckPath()
         else:
             info.Log.InternalError('Path must be text')
 
     def Target(self):
+        self._CheckPath()
         return self._Target

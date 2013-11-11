@@ -11,6 +11,9 @@ class FileLock(interface.BaseLock):
         pass
 
     def Lock(self, id):
+        if not isinstance(id, str) or not info.IsDirFile(id):
+            info.Log.InternalError('Bad identifier')
+
         try:
             with open(info.LockDir + id, 'wb+') as File:
                 fcntl.flock(File, fcntl.LOCK_EX)
@@ -35,6 +38,9 @@ class FileLock(interface.BaseLock):
             info.Log.Error('Can not lock ' + id)
 
     def Unlock(self, id):
+        if not isinstance(id, str) or not info.IsDirFile(id):
+            info.Log.InternalError('Bad identifier')
+
         try:
             with open(info.LockDir + id, 'rb+') as File:
                 fcntl.flock(File, fcntl.LOCK_EX)
