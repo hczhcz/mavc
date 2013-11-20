@@ -10,6 +10,8 @@ class DirDataType(DirFileDataType, SetDataType):
         self._SetData(data)
 
     def _DoOnPush(self):
+        self._CheckPath()
+
         OldDir = info.WorkingDir
         NewDir = OldDir + self.Target() + os.sep
 
@@ -29,6 +31,8 @@ class DirDataType(DirFileDataType, SetDataType):
             info.WorkingDir = OldDir
 
     def _DoOnPull(self):
+        self._CheckPath()
+
         OldDir = info.WorkingDir
         NewDir = OldDir + self.Target() + os.sep
 
@@ -59,6 +63,8 @@ class FileDataType(DirFileDataType):
         self._SetTarget(file)
 
     def _DoOnPush(self):
+        self._CheckPath()
+
         FromFile = info.WorkingDir + self.Target()
 
         # Read from file
@@ -73,6 +79,8 @@ class FileDataType(DirFileDataType):
             info.Log.Error('Can not open file ' + FromFile)
 
     def _DoOnPull(self):
+        self._CheckPath()
+
         ToFile = info.WorkingDir + self.Target()
         OutDir = info.OutputDir + info.WorkingDir
         BakDir = info.BackupDir + info.WorkingDir

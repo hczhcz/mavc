@@ -25,4 +25,4 @@ info.Lock = module.FileLock()
 info.Database = module.PickleZlibDB()
 
 # The builder system
-info.Builder = module.FileBuilder()
+info.Builder = module.ImplBuilder()
