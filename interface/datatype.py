@@ -3,6 +3,9 @@ import mavc.info as info
 # Base class of data
 # Abstract, override methods to impletment this class
 class BaseDataType(object):
+    def __init__(self):
+        info.Log.InternalError('Abstract data can not be initialized')
+
     # Version, for compatibility checking, check by database system
     DataVer = info.Version
 
