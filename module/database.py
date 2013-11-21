@@ -24,13 +24,14 @@ class FileDB(interface.BaseDB):
     def _Decompress(self, data):
         pass
 
-    def Push(self, data):
+    def Push(self, data, doaction = True):
         # Checking
         if not isinstance(data, interface.BaseDataType):
             info.Log.InternalError('Unknown data that can not push')
 
         # Pre processing
-        data.OnPush()
+        if doaction:
+            data.OnPush()
 
         info.Log.Message('Generating datastream')
 
@@ -71,7 +72,9 @@ class FileDB(interface.BaseDB):
             try:
                 os.rename(info.StoreDir + TempFileName, \
                     info.StoreDir + FileName)
-                info.Log.Progress('Database file written ' + FileName)
+                info.Log.Message('Database file written ' + FileName)
+                if doaction:
+                    info.Log.Progress('Database stored ' + FileName)
             except:
                 info.Log.Error('Can not write database file ' + FileName)
 
@@ -107,11 +110,10 @@ class FileDB(interface.BaseDB):
 
         if isinstance(Obj, interface.BaseDataType)\
             and info.Compatible(Obj.DataVer):
+            info.Log.Message('Database file read ' + id)
             if doaction:
                 Obj.OnPull()
                 info.Log.Progress('Data restored ' + id)
-            else:
-                info.Log.Message('Database file read ' + id)
             return Obj
         else:
             info.Log.InternalError('Unknown data from the database ' + id)

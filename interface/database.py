@@ -9,7 +9,7 @@ class BaseDB(object):
     # Push data to the database
     # Return identifier
     # Set doaction = True to call OnPush()
-    def Push(self, data):
+    def Push(self, data, doaction = True):
         pass
 
     # Pull data from the database
