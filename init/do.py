@@ -23,6 +23,3 @@ info.Lock = module.FileLock()
 # The database system
 # Pickle and Zlib used by default
 info.Database = module.PickleZlibDB()
-
-# The builder system
-info.Builder = module.ImplBuilder()
