@@ -1,4 +1,3 @@
-import os
 import mavc.info as info
 from storable import *
 
@@ -16,10 +15,10 @@ class RawDataType(StorableDataType):
     def Data(self):
         return self._Data
 
-    def _DoOnPush(self):
+    def _DoOnPush(self, target):
         info.Log.Message('Push ' + str(self._Data))
 
-    def _DoOnPull(self):
+    def _DoOnPull(self, target):
         info.Log.Message('Pull ' + str(self._Data))
 
     def _DoRef(self):
@@ -61,14 +60,18 @@ class SetDataType(StorableDataType):
     def Data(self):
         return self._Data
 
-    def _DoOnPush(self):
+    def _DoOnPush(self, target):
         info.Log.Message('Push a set')
-        self._IDData = {info.Database.Push(item) for item in self._Data}
+        self._IDData = {
+            info.Database.Push(item, True, target) for item in self._Data
+        }
         self._Data = set()
 
-    def _DoOnPull(self):
+    def _DoOnPull(self, target):
         info.Log.Message('Pull a set')
-        self._Data = {info.Database.Pull(item) for item in self._IDData}
+        self._Data = {
+            info.Database.Pull(item, True, target) for item in self._IDData
+        }
         self._IDData = set()
 
     def _DoRef(self):
@@ -92,14 +95,18 @@ class ListDataType(StorableDataType):
     def Data(self):
         return self._Data
 
-    def _DoOnPush(self):
+    def _DoOnPush(self, target):
         info.Log.Message('Push a list')
-        self._IDData = [info.Database.Push(item) for item in self._Data]
+        self._IDData = [
+            info.Database.Push(item, True, target) for item in self._Data
+        ]
         self._Data = list()
 
-    def _DoOnPull(self):
+    def _DoOnPull(self, target):
         info.Log.Message('Pull a list')
-        self._Data = [info.Database.Pull(item) for item in self._IDData]
+        self._Data = [
+            info.Database.Pull(item, True, target) for item in self._IDData
+        ]
         self._IDData = list()
 
     def _DoRef(self):

@@ -10,12 +10,12 @@ class BaseDataType(object):
     DataVer = info.Version
 
     # Called on database pushing
-    def OnPush(self):
+    def OnPush(self, target):
         pass
 
     # Called on database pulling
     # Do action such as file IO
-    def OnPull(self):
+    def OnPull(self, target):
         pass
 
     # Return a set of identifier that needed (referred) by this object

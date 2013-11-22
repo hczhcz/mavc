@@ -4,15 +4,15 @@ import mavc.info as info
 from abstract import *
 
 class DirDataType(DirFileDataType, SetDataType):
-    def __init__(self, dir, data):
-        info.Log.Progress('Dir ' + dir)
-        self._SetTarget(dir)
+    def __init__(self, targetdir, data):
+        info.Log.Progress('Dir ' + targetdir)
+        self._SetTarget(targetdir)
         self._SetData(data)
 
-    def _DoOnPush(self):
+    def _DoOnPush(self, target):
         self._CheckPath()
 
-        OldDir = info.WorkingDir
+        OldDir = target
         NewDir = OldDir + self.Target() + os.sep
 
         # Check dir
@@ -22,18 +22,12 @@ class DirDataType(DirFileDataType, SetDataType):
             info.Log.Error('Dir not exist ' + NewDir)
 
         # With new dir do push
-        try:
-            info.WorkingDir = OldDir + self.Target() + os.sep
-            super(DirDataType, self)._DoOnPush()
-        except:
-            raise
-        finally:
-            info.WorkingDir = OldDir
+        super(DirDataType, self)._DoOnPush(NewDir)
 
-    def _DoOnPull(self):
+    def _DoOnPull(self, target):
         self._CheckPath()
 
-        OldDir = info.WorkingDir
+        OldDir = target
         NewDir = OldDir + self.Target() + os.sep
 
         # Make dir if necessary
@@ -47,25 +41,19 @@ class DirDataType(DirFileDataType, SetDataType):
                 info.Log.Error('Can not create dir ' + NewDir)
 
         # With new dir do pull
-        try:
-            info.WorkingDir = NewDir
-            super(DirDataType, self)._DoOnPull()
-        except:
-            raise
-        finally:
-            info.WorkingDir = OldDir
+        super(DirDataType, self)._DoOnPull(NewDir)
 
 class FileDataType(DirFileDataType):
     _FileData = None
 
-    def __init__(self, file):
-        info.Log.Progress('File ' + file)
-        self._SetTarget(file)
+    def __init__(self, targetfile):
+        info.Log.Progress('File ' + targetfile)
+        self._SetTarget(targetfile)
 
-    def _DoOnPush(self):
+    def _DoOnPush(self, target):
         self._CheckPath()
 
-        FromFile = info.WorkingDir + self.Target()
+        FromFile = target + self.Target()
 
         # Read from file
         if not os.path.isfile(FromFile):
@@ -78,12 +66,12 @@ class FileDataType(DirFileDataType):
         except:
             info.Log.Error('Can not open file ' + FromFile)
 
-    def _DoOnPull(self):
+    def _DoOnPull(self, target):
         self._CheckPath()
 
-        ToFile = info.WorkingDir + self.Target()
-        OutDir = info.OutputDir + info.WorkingDir
-        BakDir = info.BackupDir + info.WorkingDir
+        ToFile = target + self.Target()
+        OutDir = info.OutputDir + target
+        BakDir = info.BackupDir + target
 
         # Check the real file
         if os.path.isfile(ToFile):

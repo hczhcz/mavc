@@ -10,12 +10,12 @@ class FileLock(interface.BaseLock):
     def __init__(self):
         pass
 
-    def Lock(self, id):
-        if not isinstance(id, str) or not info.IsDirFile(id):
+    def Lock(self, identifier):
+        if not isinstance(identifier, str) or not info.IsDirFile(identifier):
             info.Log.InternalError('Bad identifier')
 
         try:
-            with open(info.LockDir + id, 'wb+') as File:
+            with open(info.LockDir + identifier, 'wb+') as File:
                 fcntl.flock(File, fcntl.LOCK_EX)
 
                 LockData = File.read()
@@ -26,23 +26,23 @@ class FileLock(interface.BaseLock):
                     LockCount = int(LockData) + 1
 
                 if LockCount < 1:
-                    info.Log.Error('Bad lock on locking ' + id)
+                    info.Log.Error('Bad lock on locking ' + identifier)
 
                 LockData = str(LockCount)
                 File.truncate()
                 File.seek(0)
                 File.write(LockData)
 
-            info.Log.Progress('Locked ' + id + ' to ' + LockData)
+            info.Log.Progress('Locked ' + identifier + ' to ' + LockData)
         except:
-            info.Log.Error('Can not lock ' + id)
+            info.Log.Error('Can not lock ' + identifier)
 
-    def Unlock(self, id):
-        if not isinstance(id, str) or not info.IsDirFile(id):
+    def Unlock(self, identifier):
+        if not isinstance(identifier, str) or not info.IsDirFile(identifier):
             info.Log.InternalError('Bad identifier')
 
         try:
-            with open(info.LockDir + id, 'rb+') as File:
+            with open(info.LockDir + identifier, 'rb+') as File:
                 fcntl.flock(File, fcntl.LOCK_EX)
 
                 LockData = File.read()
@@ -50,16 +50,16 @@ class FileLock(interface.BaseLock):
                 LockCount = int(LockData) - 1
 
                 if LockCount < 0:
-                    info.Log.Error('Bad lock on unlocking ' + id)
+                    info.Log.Error('Bad lock on unlocking ' + identifier)
 
                 LockData = str(LockCount)
                 File.truncate()
                 File.seek(0)
                 File.write(LockData)
 
-            info.Log.Progress('Unlocked ' + id + ' to ' + LockData)
+            info.Log.Progress('Unlocked ' + identifier + ' to ' + LockData)
         except:
-            info.Log.Error('Can not unlock ' + id)
+            info.Log.Error('Can not unlock ' + identifier)
 
     def AllLocked(self):
         try:

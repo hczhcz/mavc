@@ -52,7 +52,8 @@ class ConsoleLog(TextLog):
 class SimpleConsoleLog(TextLog):
     def Message(self, msg):
         # Ignore message
-        super(TextLog, self).Message(msg)
+        # super(TextLog, self).Message(msg)
+        pass
 
     def _AddText(self, title, text):
         # Check if input is string

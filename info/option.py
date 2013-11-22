@@ -7,9 +7,6 @@ import datetime
 # Make the database readable
 ReadableMode = False
 
-# Working dir
-WorkingDir = ''
-
 # Allow binary database, not readable but effective
 # If false, the database system will use plain text
 BinaryStore = not ReadableMode
@@ -22,7 +19,7 @@ DoCompress = BinaryStore
 CompressLevel = 6
 
 # Format of time, ISO by default
-TimeInFormat = lambda: datetime.datetime.now().isoformat()
+TimeInFormat = datetime.datetime.now().isoformat
 
 # Check file and dir name
 IsDirFile = lambda x: not set(x) <= {'.', '*', '?', '+'} and not os.sep in x

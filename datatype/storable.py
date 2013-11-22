@@ -9,12 +9,12 @@ class StorableDataType(interface.BaseDataType):
 
     # Called by OnPush()
     # Do action such as file IO
-    def _DoOnPush(self):
+    def _DoOnPush(self, target):
         pass
 
     # Called by OnPull()
     # Do action such as file IO
-    def _DoOnPull(self):
+    def _DoOnPull(self, target):
         pass
 
     # Called by Ref()
@@ -24,17 +24,17 @@ class StorableDataType(interface.BaseDataType):
     def _DoRef(self):
         pass
 
-    def OnPush(self):
+    def OnPush(self, target):
         if not self._Stored:
             self._Stored = True
-            self._DoOnPush()
+            self._DoOnPush(target)
         else:
             info.Log.InternalError('Can not push stored data')
 
-    def OnPull(self):
+    def OnPull(self, target):
         if self._Stored:
             self._Stored = False
-            self._DoOnPull()
+            self._DoOnPull(target)
         else:
             info.Log.InternalError('Can not pull restored data')
 
@@ -50,7 +50,7 @@ class StorableDataType(interface.BaseDataType):
         def AppendRef(item):
             if not item in Result:
                 Result.add(item)
-                Ref = info.Database.Pull(item, False).Ref()
+                Ref = info.Database.Pull(item, False, None).Ref()
                 for refitem in Ref:
                     AppendRef(refitem)
 

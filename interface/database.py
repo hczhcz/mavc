@@ -9,13 +9,13 @@ class BaseDB(object):
     # Push data to the database
     # Return identifier
     # Set doaction = True to call OnPush()
-    def Push(self, data, doaction = True):
+    def Push(self, data, doaction, target):
         pass
 
     # Pull data from the database
     # Return data
     # Set doaction = True to call OnPull()
-    def Pull(self, id, doaction = True):
+    def Pull(self, identifier, doaction, target):
         pass
 
     # Pull all locked data but not call OnPull()
