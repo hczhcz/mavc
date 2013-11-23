@@ -1,6 +1,9 @@
-import mavc.info
-import mavc.interface
-import mavc.datatype
-import mavc.module
-import mavc.init
-import mavc.front
+import info
+import interface
+import datatype
+import module
+import init
+import front
+from front import *
+
+init.Init()
