@@ -1,31 +1,38 @@
+from mavc import info
 from mavc import datatype
 
 def Package(comment, *data):
     '''Create package data object'''
 
-    return datatype.PackageDataType(comment, set(data))
+    info.LastData = datatype.PackageDataType(comment, set(data))
+    return info.LastData
 
 def Commit(comment, *data):
     '''Create commit data object'''
 
-    return datatype.CommitDataType(comment, set(data))
+    info.LastData = datatype.CommitDataType(comment, set(data))
+    return info.LastData
 
 def CommitWithTime(comment, time, *data):
     '''Create commit data object and set time stamp manually'''
 
-    return datatype.CommitDataType(comment, set(data), time)
+    info.LastData = datatype.CommitDataType(comment, set(data), time)
+    return info.LastData
 
 def Task(comment, *data):
     '''Create task data object'''
 
-    return datatype.TaskDataType(comment, list(data))
+    info.LastData = datatype.TaskDataType(comment, list(data))
+    return info.LastData
 
 def Dir(targetdir, *data):
     '''Create dir data object'''
 
-    return datatype.DirDataType(targetdir, set(data))
+    info.LastData = datatype.DirDataType(targetdir, set(data))
+    return info.LastData
 
 def File(targetfile):
     '''Create file data object'''
 
-    return datatype.FileDataType(targetfile)
+    info.LastData = datatype.FileDataType(targetfile)
+    return info.LastData

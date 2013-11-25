@@ -9,4 +9,3 @@ Compatible = lambda ver: ver == '1.0.0'
 Log = None
 Lock = None
 Database = None
-Builder = None
