@@ -1,5 +1,5 @@
 import os
-import mavc.info as info
+from mavc import info
 
 # Check tool dir and initialize if necessary
 def _EnsureDir(targetdir):

@@ -1,13 +1,13 @@
-import mavc.info as info
-from abstract import *
+from mavc import info
+import abstract
 
-class PackageDataType(CommentDataType, SetDataType):
+class PackageDataType(abstract.CommentDataType, abstract.SetDataType):
     def __init__(self, comment, data):
         info.Log.Progress('Package ' + comment)
         self._SetComment(comment)
         self._SetData(data)
 
-class CommitDataType(CommentDataType, SetDataType):
+class CommitDataType(abstract.CommentDataType, abstract.SetDataType):
     _Time = ''
 
     def __init__(self, comment, data, time = ''):
@@ -23,7 +23,7 @@ class CommitDataType(CommentDataType, SetDataType):
         else:
             info.Log.InternalError('Time must be text')
 
-class TaskDataType(CommentDataType, ListDataType):
+class TaskDataType(abstract.CommentDataType, abstract.ListDataType):
     def __init__(self, comment, data):
         info.Log.Progress('Task ' + comment)
         self._SetComment(comment)

@@ -1,5 +1,5 @@
-import mavc.info as info
-import mavc.interface as interface
+from mavc import info
+from mavc import interface
 
 # Log expressed in plain text
 # Override AddText() method to implement

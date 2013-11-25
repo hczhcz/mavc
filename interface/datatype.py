@@ -1,4 +1,4 @@
-import mavc.info as info
+from mavc import info
 
 # Base class of data
 # Abstract, override methods to impletment this class

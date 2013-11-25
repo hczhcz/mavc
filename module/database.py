@@ -2,8 +2,8 @@ import os
 import fcntl
 import cPickle as pickle
 import zlib
-import mavc.info as info
-import mavc.interface as interface
+from mavc import info
+from mavc import interface
 
 # Database based on local files
 # Work under current dir

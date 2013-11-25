@@ -1,12 +1,12 @@
 import os
-from option import *
+import option
 
 # Tool dirs
 # Also need to be added in AllToolDir
 
 # The root dir
 # Hidden by default
-RootDir = ('_mavc' if ReadableMode else '.mavc') + os.sep
+RootDir = ('_mavc' if option.ReadableMode else '.mavc') + os.sep
 
 # The dir name of database
 StoreDir = RootDir + 'data' + os.sep

@@ -1,4 +1,4 @@
-import mavc.datatype as datatype
+from mavc import datatype
 
 def Package(comment, *data):
     return datatype.PackageDataType(comment, set(data))

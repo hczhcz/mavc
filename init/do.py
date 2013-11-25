@@ -1,6 +1,6 @@
-import mavc.info as info
-import mavc.module as module
-from dirinit import *
+from mavc import info
+from mavc import module
+import dirinit
 
 def Init():
     # A MultiLog() as the root of the log system
@@ -16,7 +16,7 @@ def Init():
     info.Log.Hint('Version ' + info.Version)
 
     # Initialization tool dirs
-    EnsureAllDir()
+    dirinit.EnsureAllDir()
 
     # The lock system
     info.Lock = module.FileLock()

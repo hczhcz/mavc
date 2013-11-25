@@ -1,9 +1,9 @@
 import os
 import fcntl
-import mavc.info as info
-from abstract import *
+from mavc import info
+import abstract
 
-class DirDataType(DirFileDataType, SetDataType):
+class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
     def __init__(self, targetdir, data):
         info.Log.Progress('Dir ' + targetdir)
         self._SetTarget(targetdir)
@@ -43,7 +43,7 @@ class DirDataType(DirFileDataType, SetDataType):
         # With new dir do pull
         super(DirDataType, self)._DoOnPull(NewDir)
 
-class FileDataType(DirFileDataType):
+class FileDataType(abstract.DirFileDataType):
     _FileData = None
 
     def __init__(self, targetfile):

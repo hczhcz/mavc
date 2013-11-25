@@ -1,5 +1,3 @@
-# import mavc.info as info
-
 # Base class of the log system
 # Error (and internal error) will cause a Python exception
 # Abstract, override methods to impletment this class

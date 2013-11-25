@@ -1,4 +1,4 @@
-import mavc.info as info
+from mavc import info
 
 # Base class of the lock system
 # Lock should be additive (two lock need two unlock)
