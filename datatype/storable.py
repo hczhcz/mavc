@@ -1,27 +1,31 @@
 from mavc import info
 from mavc import interface
 
-# Storable data
-# Use flag _Stored to mark
 class StorableDataType(interface.BaseDataType):
+    '''Storable data
+    Use flag _Stored to mark'''
+
     # If data stored, be True after OnPush() and before OnPull()
     _Stored = False
 
-    # Called by OnPush()
-    # Do action such as file IO
     def _DoOnPush(self, target):
+        '''Called by OnPush()
+        Do action such as file IO'''
+
         pass
 
-    # Called by OnPull()
-    # Do action such as file IO
     def _DoOnPull(self, target):
+        '''Called by OnPull()
+        Do action such as file IO'''
+
         pass
 
-    # Called by Ref()
-    # Return all needed identifier
-    # Do not keep any identifier before OnPush() or after OnPull()
-    # Return an empty set if nothing to return
     def _DoRef(self):
+        '''Called by Ref()
+        Return all needed identifier
+        Do not keep any identifier before OnPush() or after OnPull()
+        Return an empty set if nothing to return'''
+
         pass
 
     def OnPush(self, target):

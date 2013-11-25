@@ -1,12 +1,14 @@
 from mavc import info
 from mavc import interface
 
-# Log expressed in plain text
-# Override AddText() method to implement
-# Log message should be English text string
 class TextLog(interface.BaseLog):
-    # Receive text and do something (print, write to file, etc)
+    '''Log expressed in plain text
+    Override AddText() method to implement
+    Log message should be English text string'''
+
     def _AddText(self, title, text):
+        '''Receive text and do something (print, write to file, etc)'''
+
         pass
 
     def Progress(self, msg):
@@ -21,10 +23,6 @@ class TextLog(interface.BaseLog):
         self._AddText('Hint', msg)
         super(TextLog, self).Hint(msg)
 
-    # def Warning(self, msg):
-    #     self._AddText('Warning', msg)
-    #     super(TextLog, self).Warning(msg)
-
     def Error(self, msg):
         self._AddText('Error', msg)
         super(TextLog, self).Error(msg)
@@ -33,10 +31,11 @@ class TextLog(interface.BaseLog):
         self._AddText('Internal error', msg)
         super(TextLog, self).InternalError(msg)
 
-# Implementation of the log system, to print log to console
-# Use standard IO
-# ISO time format
 class ConsoleLog(TextLog):
+    '''Implementation of the log system, to print log to console
+    Use standard IO
+    ISO time format'''
+
     def _AddText(self, title, text):
         # Check if input is string
         if not isinstance(title, str):
@@ -46,12 +45,14 @@ class ConsoleLog(TextLog):
             text = str(text)
         print(info.TimeInFormat() + ' ' + title + ': ' + text)
 
-# Implementation of the log system
-# Like CinsoleLog but print important log only
-# No time information
 class SimpleConsoleLog(TextLog):
+    '''Implementation of the log system
+    Like CinsoleLog but print important log only
+    No time information'''
+
     def Message(self, msg):
-        # Ignore message
+        '''Ignore message'''
+
         # super(TextLog, self).Message(msg)
         pass
 
@@ -64,13 +65,15 @@ class SimpleConsoleLog(TextLog):
             text = str(text)
         print(title + ': ' + text)
 
-# A wrapper to use multiple log system
-# use RegLog() to add class of log
 class MultiLog(object):
+    '''A wrapper to use multiple log system
+    use RegLog() to add class of log'''
+
     _LogList = set()
 
-    # Iterate the list when a method is called
     def __getattr__(self, name):
+        '''Iterate the list when a method is called'''
+
         # Make a closure to apply the call
         def DynamicCall(msg):
             for item in self._LogList:
@@ -79,9 +82,13 @@ class MultiLog(object):
         return DynamicCall
 
     def RegLog(self, log):
-        # Only accept log type
+        '''Add to the list
+        Only accept log object'''
+
         if isinstance(log, interface.BaseLog):
             self._LogList.add(log)
 
     def Clear(self):
+        '''Clear the list of log object'''
+
         self._LogList.clear()

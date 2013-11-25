@@ -3,10 +3,11 @@ import fcntl
 from mavc import info
 from mavc import interface
 
-# Implementation of the lock system
-# Stored as files
-# A lock file is just an integer
 class FileLock(interface.BaseLock):
+    '''Implementation of the lock system
+    Stored as files
+    A lock file is just an integer'''
+
     def __init__(self):
         pass
 

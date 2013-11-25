@@ -5,23 +5,34 @@ import zlib
 from mavc import info
 from mavc import interface
 
-# Database based on local files
-# Work under current dir
-# Override methods to implement
 class FileDB(interface.BaseDB):
+    '''Database based on local files
+    Work under current dir
+    Override methods to implement'''
+
     def _StrHash(self, data):
+        '''Calculate the hash value'''
+
         pass
 
     def _ObjToStr(self, data):
+        '''Transform an object to a string'''
+
         pass
 
     def _StrToObj(self, data):
+        '''Transform a string to an object'''
+
         pass
 
     def _Compress(self, data):
+        '''Compress the string'''
+
         pass
 
     def _Decompress(self, data):
+        '''Decompress the string'''
+
         pass
 
     def Push(self, data, doaction, target):
@@ -162,10 +173,11 @@ class FileDB(interface.BaseDB):
 
         info.Log.Progress('Defragment finished')
 
-# Implementation of the database system
-# Use zlib to hash and compress data
-# Use cPickle to store objects
 class PickleZlibDB(FileDB):
+    '''Implementation of the database system
+    Use zlib to hash and compress data
+    Use cPickle to store objects'''
+
     # No longer abstract
     def __init__(self):
         pass

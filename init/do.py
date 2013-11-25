@@ -3,6 +3,8 @@ from mavc import module
 import dirinit
 
 def Init():
+    '''Do initialization of the whole system'''
+
     # A MultiLog() as the root of the log system
     info.Log = module.MultiLog()
 
@@ -15,7 +17,7 @@ def Init():
     info.Log.Hint(info.FullName)
     info.Log.Hint('Version ' + info.Version)
 
-    # Initialization tool dirs
+    # Initialize tool dirs
     dirinit.EnsureAllDir()
 
     # The lock system

@@ -4,6 +4,10 @@ from mavc import info
 import abstract
 
 class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
+    '''Dir data
+    Check dir on push
+    Ensure dir (create if not exist) on pull'''
+
     def __init__(self, targetdir, data):
         info.Log.Progress('Dir ' + targetdir)
         self._SetTarget(targetdir)
@@ -44,6 +48,10 @@ class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
         super(DirDataType, self)._DoOnPull(NewDir)
 
 class FileDataType(abstract.DirFileDataType):
+    '''File data
+    Read file on push
+    Write file on pull'''
+
     _FileData = None
 
     def __init__(self, targetfile):

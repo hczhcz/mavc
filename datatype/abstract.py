@@ -1,10 +1,11 @@
 from mavc import info
 import storable
 
-# Raw data
-# Can store almost anything
-# For debug only
 class RawDataType(storable.StorableDataType):
+    '''Raw data
+    Can store almost anything
+    For debug only'''
+
     _Data = None
 
     def __init__(self, data):
@@ -24,9 +25,10 @@ class RawDataType(storable.StorableDataType):
     def _DoRef(self):
         return set()
 
-# Data with comment
-# Comment should be string
 class CommentDataType(storable.StorableDataType):
+    '''Data with comment
+    Comment should be string'''
+
     _Comment = ''
 
     # As string, return comment
@@ -42,9 +44,10 @@ class CommentDataType(storable.StorableDataType):
     def Comment(self):
         return self._Comment
 
-# Unique list (set) of identifier
-# Check type of input data
 class SetDataType(storable.StorableDataType):
+    '''Unique list (set) of identifier
+    Check type of input data'''
+
     _Data = set()
     _IDData = set()
 
@@ -77,9 +80,10 @@ class SetDataType(storable.StorableDataType):
     def _DoRef(self):
         return self._IDData
 
-# Ordered list of identifier
-# Check type of input data
 class ListDataType(storable.StorableDataType):
+    '''Ordered list of identifier
+    Check type of input data'''
+
     _Data = list()
     _IDData = list()
 
@@ -112,9 +116,10 @@ class ListDataType(storable.StorableDataType):
     def _DoRef(self):
         return self._IDData
 
-# Dir or file
-# Do IO when calling _DoOnPush() or _DoOnPull()
 class DirFileDataType(storable.StorableDataType):
+    '''Dir or file
+    Do IO when calling _DoOnPush() or _DoOnPull()'''
+
     _Target = ''
 
     def _CheckPath(self):
