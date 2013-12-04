@@ -19,6 +19,10 @@ def Walk(target, ignore = r'.*' + os.sep + r'\..*'):
         ReObject = re.compile(ignore)
         ignore = lambda x: ReObject.match(x)
 
+    # Append separator
+    if target[-1] != os.sep:
+        target += os.sep
+
     info.Log.Message('Scanning dir ' + target)
 
     Result = set()
