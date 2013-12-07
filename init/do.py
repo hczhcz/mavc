@@ -9,8 +9,10 @@ def Init():
     info.Log = module.MultiLog()
 
     # Print to console by default
-    # info.Log.RegLog(module.ConsoleLog())
-    info.Log.RegLog(module.SimpleConsoleLog())
+    if info.Verbose:
+        info.Log.RegLog(module.ConsoleLog())
+    else:
+        info.Log.RegLog(module.SimpleConsoleLog())
 
     # Print startup information
     info.Log.Message('Hello, imagination')

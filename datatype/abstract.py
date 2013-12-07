@@ -124,7 +124,7 @@ class DirFileDataType(storable.StorableDataType):
 
     def _CheckPath(self):
         if not info.IsDirFile(self._Target):
-            info.Log.InternalError('Bad path')
+            info.Log.InternalError('Bad path ' + self._Target)
 
     def _SetTarget(self, target):
         if isinstance(target, str):

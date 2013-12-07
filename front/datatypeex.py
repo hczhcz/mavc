@@ -30,6 +30,7 @@ def Walk(target, ignore = r'.*' + os.sep + r'\..*'):
     if not os.path.isdir(target):
         info.Log.Error('Not a dir ' + target)
 
+    # Scan the list
     for item in os.listdir(target):
         NewPath = target + item
 

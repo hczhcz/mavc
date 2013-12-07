@@ -1,7 +1,7 @@
 import os
 import datetime
 
-# Do not change if database is already created
+# Do not change options about database if database is already created
 
 # Readable mode
 # Make the database readable
@@ -17,6 +17,9 @@ DoCompress = BinaryStore
 
 # Zlib compression level (0 to 9)
 CompressLevel = 6
+
+# Print verbose message
+Verbose = True
 
 # Format of time, ISO by default
 TimeInFormat = datetime.datetime.now().isoformat
