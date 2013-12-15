@@ -44,4 +44,5 @@ def Walk(target, ignore = r'.*' + os.sep + r'\..*'):
                 # Is file
                 Result.add(datatype.File(item))
 
-    return Result
+    info.LastData = Result
+    return info.LastData

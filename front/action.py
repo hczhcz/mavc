@@ -1,14 +1,24 @@
 from mavc import info
 
-def Push():
-    '''TODO'''
+def Push(data, target = ''):
+    '''Push data to the database'''
 
-    pass
+    info.Database.Push(data, True, target)
 
-def Pull():
-    '''TODO'''
+def Pull(identifier, target = ''):
+    '''Pop data from the database'''
 
-    pass
+    info.Database.Pull(identifier, True, target)
+
+def Write(data, target = ''):
+    '''Push data to the database without doing action'''
+
+    info.Database.Push(data, False, target)
+
+def Read(identifier, target = ''):
+    '''Pop data from the database without doing action'''
+
+    info.Database.Pull(identifier, False, target)
 
 def List():
     '''TODO, list all locked'''
