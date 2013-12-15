@@ -10,6 +10,26 @@ class BaseDataType(object):
     # Version, for compatibility checking, check by database system
     DataVer = info.Version
 
+    def __repr__(self):
+        '''Repr data as string'''
+
+        return self.AsStr() if info.FriendlyRepr else self.AsCode()
+
+    def __str__(self):
+        '''Cast data as string'''
+
+        return self.AsStr()
+
+    def AsStr(self):
+        '''Return data as readable string'''
+
+        return 'Data ' + self.__class__.__name__ + ' ' + str(self.__dict__)
+
+    def AsCode(self):
+        '''Return data as code string'''
+
+        return self.__class__.__name__ + '()'
+
     def OnPush(self, target):
         '''Called on database pushing'''
 

@@ -21,6 +21,10 @@ CompressLevel = 6
 # Print verbose message
 Verbose = True
 
+# Print data friendly
+# Not really repr but print as readable string if true
+FriendlyRepr = True
+
 # Format of time, ISO by default
 TimeInFormat = datetime.datetime.now().isoformat
 

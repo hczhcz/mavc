@@ -9,9 +9,15 @@ class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
     Ensure dir (create if not exist) on pull'''
 
     def __init__(self, targetdir, data):
-        info.Log.Progress('Dir ' + targetdir)
         self._SetTarget(targetdir)
         self._SetData(data)
+        info.Log.Progress(self.AsStr())
+
+    def AsStr(self):
+        return 'Dir ' + self._Target
+
+    def AsCode(self):
+        return 'DirDataType(' + self._Target + ', ' + repr(self._Data) + ')'
 
     def _DoOnPush(self, target):
         self._CheckPath()
@@ -55,8 +61,14 @@ class FileDataType(abstract.DirFileDataType):
     _FileData = None
 
     def __init__(self, targetfile):
-        info.Log.Progress('File ' + targetfile)
         self._SetTarget(targetfile)
+        info.Log.Progress(self.AsStr())
+
+    def AsStr(self):
+        return 'File ' + self._Target
+
+    def AsCode(self):
+        return 'FileDataType(' + self._Target + ')'
 
     def _DoOnPush(self, target):
         self._CheckPath()

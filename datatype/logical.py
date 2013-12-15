@@ -6,9 +6,15 @@ class PackageDataType(abstract.CommentDataType, abstract.SetDataType):
     Stored as a set, members are unique and not ordered'''
 
     def __init__(self, comment, data):
-        info.Log.Progress('Package ' + comment)
         self._SetComment(comment)
         self._SetData(data)
+        info.Log.Progress(self.AsStr())
+
+    def AsStr(self):
+        return 'Package ' + self._Comment
+
+    def AsCode(self):
+        return 'PackageDataType(' + self._Comment + ', ' + repr(self._Data) + ')'
 
 class CommitDataType(abstract.CommentDataType, abstract.SetDataType):
     '''Commit, like a package but with a time stamp
@@ -17,7 +23,6 @@ class CommitDataType(abstract.CommentDataType, abstract.SetDataType):
     _Time = ''
 
     def __init__(self, comment, data, time = ''):
-        info.Log.Progress('Commit ' + comment)
         self._SetComment(comment)
         self._SetData(data)
         # Auto generate time if necessary
@@ -28,12 +33,26 @@ class CommitDataType(abstract.CommentDataType, abstract.SetDataType):
             self._Time = time
         else:
             info.Log.InternalError('Time must be text')
+        info.Log.Progress(self.AsStr())
+
+    def AsStr(self):
+        return 'Commit ' + self._Comment
+
+    def AsCode(self):
+        return 'CommitDataType(' + self._Comment + ', ' + repr(self._Data)\
+            + self._Time + ')'
 
 class TaskDataType(abstract.CommentDataType, abstract.ListDataType):
     '''Task, contains multiple data
     Stored as an ordered list'''
 
     def __init__(self, comment, data):
-        info.Log.Progress('Task ' + comment)
         self._SetComment(comment)
         self._SetData(data)
+        info.Log.Progress(self.AsStr())
+
+    def AsStr(self):
+        return 'Task ' + self._Comment
+
+    def AsCode(self):
+        return 'TaskDataType(' + self._Comment + ', ' + repr(self._Data) + ')'

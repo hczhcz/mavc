@@ -9,9 +9,15 @@ class RawDataType(storable.StorableDataType):
     _Data = None
 
     def __init__(self, data):
-        info.Log.Progress('Raw data ' + str(data))
-        info.Log.Hint('Raw data type for debug only')
         self._Data = data
+        info.Log.Progress(self.AsStr())
+        info.Log.Hint('Raw data type for debug only')
+
+    def AsStr(self):
+        return 'Raw data ' + str(self._Data);
+
+    def AsCode(self):
+        return 'RawDataType(' + repr(self._Data) + ')'
 
     def Data(self):
         return self._Data
