@@ -19,7 +19,7 @@ DoCompress = BinaryStore
 CompressLevel = 6
 
 # Print verbose message
-Verbose = True
+Verbose = False
 
 # Print data friendly
 # Not really repr but print as readable string if true
