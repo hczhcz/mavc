@@ -19,7 +19,7 @@ def Walk(target, ignore = r'.*' + os.sep + r'\..*'):
     # Regular expression to lambda
     if isinstance(ignore, str):
         ReObject = re.compile(ignore)
-        ignore = lambda x: ReObject.match(x)
+        ignore = ReObject.match
 
     # Append separator
     if target[-1] != os.sep:

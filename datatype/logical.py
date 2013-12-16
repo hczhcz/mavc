@@ -16,7 +16,8 @@ class PackageDataType(abstract.CommentDataType, abstract.SetDataType):
         return 'Package ' + self._Comment
 
     def AsCode(self):
-        return 'PackageDataType(' + self._Comment + ', ' + repr(self._Data) + ')'
+        return 'PackageDataType(' + self._Comment\
+            + ', ' + repr(self._Data) + ')'
 
 class CommitDataType(abstract.CommentDataType, abstract.SetDataType):
     '''Commit, like a package but with a time stamp

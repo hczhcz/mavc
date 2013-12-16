@@ -16,7 +16,7 @@ class RawDataType(storable.StorableDataType):
         info.Log.Hint('Raw data type for debug only')
 
     def AsStr(self):
-        return 'Raw data ' + str(self._Data);
+        return 'Raw data ' + str(self._Data)
 
     def AsCode(self):
         return 'RawDataType(' + repr(self._Data) + ')'
