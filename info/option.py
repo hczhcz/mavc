@@ -31,4 +31,7 @@ FriendlyRepr = True
 TimeInFormat = datetime.datetime.now().isoformat
 
 # Check file and dir name
-IsDirFile = lambda x: not set(x) <= {'.', '*', '?', '+'} and not os.sep in x
+IsDirFile = lambda x: not set(x) <= {'.', '*', '?', '+', ':'}\
+    and not os.sep in x\
+    and x != os.curdir\
+    and x != os.pardir
