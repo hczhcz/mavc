@@ -25,7 +25,7 @@ class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
         self._CheckPath()
 
         OldDir = target
-        NewDir = OldDir + self.Target() + os.sep
+        NewDir = os.path.join(OldDir, self.Target())
 
         # Check dir
         if os.path.isdir(NewDir):
@@ -40,7 +40,7 @@ class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
         self._CheckPath()
 
         OldDir = target
-        NewDir = OldDir + self.Target() + os.sep
+        NewDir = os.path.join(OldDir, self.Target())
 
         # Make dir if necessary
         if os.path.isdir(NewDir):
@@ -75,7 +75,7 @@ class FileDataType(abstract.DirFileDataType):
     def _DoOnPush(self, target):
         self._CheckPath()
 
-        FromFile = target + self.Target()
+        FromFile = os.path.join(target, self.Target())
 
         # Read from file
         if not os.path.isfile(FromFile):
@@ -91,9 +91,9 @@ class FileDataType(abstract.DirFileDataType):
     def _DoOnPull(self, target):
         self._CheckPath()
 
-        ToFile = target + self.Target()
-        OutDir = info.OutputDir + target
-        BakDir = info.BackupDir + target
+        ToFile = os.path.join(target, self.Target())
+        OutDir = os.path.join(info.OutputDir, target)
+        BakDir = os.path.join(info.BackupDir, target)
 
         # Check the real file
         if os.path.isfile(ToFile):
@@ -120,7 +120,7 @@ class FileDataType(abstract.DirFileDataType):
             try:
                 if not os.path.isdir(BakDir):
                     os.mkdir(BakDir)
-                os.rename(ToFile, info.BackupDir + ToFile)
+                os.rename(ToFile, os.path.join(info.BackupDir, ToFile))
             except:
                 info.Log.Error('Can not backup file ' + ToFile)
 
@@ -129,7 +129,7 @@ class FileDataType(abstract.DirFileDataType):
             try:
                 if not os.path.isdir(OutDir):
                     os.mkdir(OutDir)
-                with open(info.OutputDir + ToFile, 'wb') as File:
+                with open(os.path.join(info.OutputDir, ToFile), 'wb') as File:
                     fcntl.flock(File, fcntl.LOCK_EX)
                     File.write(self._FileData)
             except:
@@ -137,7 +137,7 @@ class FileDataType(abstract.DirFileDataType):
 
             # Apply from buffer file
             try:
-                os.rename(info.OutputDir + ToFile, ToFile)
+                os.rename(os.path.join(info.OutputDir, ToFile), ToFile)
                 info.Log.Progress('File written ' + ToFile)
             except:
                 info.Log.Error('Can not write file ' + ToFile)

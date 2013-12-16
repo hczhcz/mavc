@@ -4,7 +4,7 @@ import sys
 import os
 
 # Load as mavc module
-sys.path.append(sys.path[0] + os.sep + os.pardir)
+sys.path.append(os.path.join(sys.path[0], os.pardir))
 from mavc import *
 
 del os

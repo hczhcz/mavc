@@ -61,23 +61,29 @@ class FileDB(interface.BaseDB):
         info.Log.Message('Push data ' + Identifier)
 
         # Check the real file and write
-        if os.path.isfile(info.StoreDir + Identifier):
+        if os.path.isfile(os.path.join(info.StoreDir, Identifier)):
             # Check if the data is the same
             try:
-                with open(info.StoreDir + Identifier, 'rb') as File:
+                with open(
+                    os.path.join(info.StoreDir, Identifier), 'rb'
+                ) as File:
                     fcntl.flock(File, fcntl.LOCK_EX)
                     if File.read() == StrFileData:
-                        info.Log.Message('Database file already exist '
-                            + Identifier)
+                        info.Log.Message(
+                            'Database file already exist ' + Identifier
+                        )
                     else:
-                        info.Log.Error('Hash conflict or bad database file '
-                            + Identifier)
+                        info.Log.Error(
+                            'Hash conflict or bad database file ' + Identifier
+                        )
             except:
                 info.Log.Error('Can not open database file ' + Identifier)
         else:
             # Write to temporary file
             try:
-                with open(info.StoreDir + TempIdentifier, 'wb') as File:
+                with open(
+                    os.path.join(info.StoreDir, TempIdentifier), 'wb'
+                ) as File:
                     fcntl.flock(File, fcntl.LOCK_EX)
                     File.write(StrFileData)
             except:
@@ -85,8 +91,10 @@ class FileDB(interface.BaseDB):
 
             # Apply from temporary file
             try:
-                os.rename(info.StoreDir + TempIdentifier,
-                    info.StoreDir + Identifier)
+                os.rename(
+                    os.path.join(info.StoreDir, TempIdentifier),
+                    os.path.join(info.StoreDir, Identifier)
+                )
                 info.Log.Message('Database file written ' + Identifier)
                 if doaction:
                     info.Log.Progress('Database stored ' + Identifier)
@@ -101,13 +109,13 @@ class FileDB(interface.BaseDB):
             info.Log.InternalError('Bad identifier')
 
         # Read from file
-        if not os.path.isfile(info.StoreDir + identifier):
+        if not os.path.isfile(os.path.join(info.StoreDir, identifier)):
             info.Log.Error('Database file not exist ' + identifier)
 
         info.Log.Message('Pull data ' + identifier)
 
         try:
-            with open(info.StoreDir + identifier, 'rb') as File:
+            with open(os.path.join(info.StoreDir, identifier), 'rb') as File:
                 fcntl.flock(File, fcntl.LOCK_EX)
                 StrFileData = File.read()
         except:
@@ -169,7 +177,10 @@ class FileDB(interface.BaseDB):
         for fragitem in Frag:
             info.Log.Progress('Found frag ' + fragitem)
             try:
-                os.rename(info.StoreDir + fragitem, info.FragDir + fragitem)
+                os.rename(
+                    os.path.join(info.StoreDir, fragitem),
+                    os.path.join(info.FragDir, fragitem)
+                )
                 info.Log.Message('Frag moved ' + fragitem)
             except:
                 info.Log.Error('Can not defrag ' + fragitem)

@@ -10,7 +10,7 @@ def Last():
 
     return info.LastData
 
-def Walk(target, ignore = r'.*' + os.sep + r'\..*'):
+def Walk(target, ignore = '(.*' + os.sep + ')?\\..*'):
     '''Walking and create data objects
     Select path and file using ignore rule (regular expression or function)
     Return a set'''
@@ -21,10 +21,6 @@ def Walk(target, ignore = r'.*' + os.sep + r'\..*'):
         ReObject = re.compile(ignore)
         ignore = ReObject.match
 
-    # Append separator
-    if target[-1] != os.sep:
-        target += os.sep
-
     info.Log.Message('Scanning dir ' + target)
 
     Result = set()
@@ -34,14 +30,14 @@ def Walk(target, ignore = r'.*' + os.sep + r'\..*'):
 
     # Scan the list
     for item in os.listdir(target):
-        NewPath = target + item
+        NewPath = os.path.join(target, item)
 
         # Checking
         if not ignore(NewPath):
             info.Log.Message('Accepted path ' + NewPath)
             if os.path.isdir(NewPath):
                 # Is dir
-                Result.add(datatype.Dir(item, Walk(NewPath + os.sep, ignore)))
+                Result.add(datatype.Dir(item, Walk(NewPath, ignore)))
             elif os.path.isfile(NewPath):
                 # Is file
                 Result.add(datatype.File(item))

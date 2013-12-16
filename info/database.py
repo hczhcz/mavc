@@ -8,22 +8,22 @@ import option
 
 # The root dir
 # Hidden by default
-RootDir = ('_mavc' if option.ReadableMode else '.mavc') + os.sep
+RootDir = ('_mavc' if option.ReadableMode else '.mavc')
 
 # The dir name of database
-StoreDir = RootDir + 'data' + os.sep
+StoreDir = os.path.join(RootDir, 'data')
 
 # The dir name of frag file
-FragDir = RootDir + 'frag' + os.sep
+FragDir = os.path.join(RootDir, 'frag')
 
 # The dir name of lock
-LockDir = RootDir + 'lock' + os.sep
+LockDir = os.path.join(RootDir, 'lock')
 
 # The dir name of output buffer
-OutputDir = RootDir + 'output' + os.sep
+OutputDir = os.path.join(RootDir, 'output')
 
 # The dir name of backup
-BackupDir = RootDir + 'backup' + os.sep
+BackupDir = os.path.join(RootDir, 'backup')
 
 # List of all tool dirs
 # Sorted by creation order
