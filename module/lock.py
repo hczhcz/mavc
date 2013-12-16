@@ -1,3 +1,5 @@
+'''The implementation of the lock system'''
+
 import os
 import fcntl
 from mavc import info

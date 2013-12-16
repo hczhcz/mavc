@@ -1,3 +1,5 @@
+'''Base information and system modules'''
+
 # MAVC
 FullName = 'Maybe Another Version Control'
 Version = '1.0.0'

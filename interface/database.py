@@ -1,3 +1,5 @@
+'''The database system, to store data'''
+
 from mavc import info
 
 class BaseDB(object):

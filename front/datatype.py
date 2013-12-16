@@ -1,3 +1,5 @@
+'''Constructors (factory) of data objects'''
+
 from mavc import info
 from mavc import datatype
 

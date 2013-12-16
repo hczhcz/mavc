@@ -1,3 +1,5 @@
+'''Initializer of the whole system'''
+
 from mavc import info
 from mavc import module
 import dirinit

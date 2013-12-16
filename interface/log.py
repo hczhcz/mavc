@@ -1,3 +1,5 @@
+'''The log system, to log and show messages'''
+
 class BaseLog(object):
     '''Base class of the log system
     Error (and internal error) will cause a Python exception

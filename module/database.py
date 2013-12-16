@@ -1,3 +1,5 @@
+'''The implementation of the database system'''
+
 import os
 import fcntl
 import cPickle as pickle
@@ -149,8 +151,9 @@ class FileDB(interface.BaseDB):
         except:
             info.Log.Error('Can not list database dir')
 
-        # Remove from frag list
         def NotFrag(item):
+            '''Remove items from the frag list'''
+
             if item in Frag:
                 Frag.remove(item)
                 Ref = self.Pull(item, False, None).Ref()

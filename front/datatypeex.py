@@ -1,3 +1,5 @@
+'''Functions that return data objects but not just constructors'''
+
 import os
 import re
 from mavc import info

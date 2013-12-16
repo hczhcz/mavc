@@ -1,3 +1,5 @@
+'''Storable data, base of data object'''
+
 from mavc import info
 from mavc import interface
 
@@ -52,6 +54,8 @@ class StorableDataType(interface.BaseDataType):
         Result = set()
 
         def AppendRef(item):
+            '''Append items to the reference list'''
+
             if not item in Result:
                 Result.add(item)
                 Ref = info.Database.Pull(item, False, None).Ref()

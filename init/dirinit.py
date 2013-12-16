@@ -1,3 +1,5 @@
+'''Check and create tool dirs'''
+
 import os
 from mavc import info
 

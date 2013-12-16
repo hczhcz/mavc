@@ -1,3 +1,5 @@
+'''Abstract data, do not use classes here directly'''
+
 from mavc import info
 import storable
 
@@ -20,6 +22,8 @@ class RawDataType(storable.StorableDataType):
         return 'RawDataType(' + repr(self._Data) + ')'
 
     def Data(self):
+        '''Return data'''
+
         return self._Data
 
     def _DoOnPush(self, target):
@@ -42,12 +46,16 @@ class CommentDataType(storable.StorableDataType):
     #     return self._Comment
 
     def _SetComment(self, comment):
+        '''Change comment'''
+
         if isinstance(comment, str):
             self._Comment = comment
         else:
             info.Log.InternalError('Comment must be text')
 
     def Comment(self):
+        '''Return comment'''
+
         return self._Comment
 
 class SetDataType(storable.StorableDataType):
@@ -58,6 +66,8 @@ class SetDataType(storable.StorableDataType):
     _IDData = set()
 
     def _SetData(self, data):
+        '''Change data (set)'''
+
         if isinstance(data, set):
             for item in data:
                 if not isinstance(item, storable.StorableDataType):
@@ -67,6 +77,8 @@ class SetDataType(storable.StorableDataType):
             info.Log.InternalError('Input is not a set')
 
     def Data(self):
+        '''Return data (set)'''
+
         return self._Data
 
     def _DoOnPush(self, target):
@@ -94,6 +106,8 @@ class ListDataType(storable.StorableDataType):
     _IDData = list()
 
     def _SetData(self, data):
+        '''Change data (list)'''
+
         if isinstance(data, list):
             for item in data:
                 if not isinstance(item, storable.StorableDataType):
@@ -103,6 +117,8 @@ class ListDataType(storable.StorableDataType):
             info.Log.InternalError('Input is not a list')
 
     def Data(self):
+        '''Return data (list)'''
+
         return self._Data
 
     def _DoOnPush(self, target):
@@ -129,10 +145,14 @@ class DirFileDataType(storable.StorableDataType):
     _Target = ''
 
     def _CheckPath(self):
+        '''Check if the path is legal'''
+
         if not info.IsDirFile(self._Target):
             info.Log.InternalError('Bad path ' + self._Target)
 
     def _SetTarget(self, target):
+        '''Change target path'''
+
         if isinstance(target, str):
             self._Target = target
             self._CheckPath()
@@ -140,5 +160,7 @@ class DirFileDataType(storable.StorableDataType):
             info.Log.InternalError('Path must be text')
 
     def Target(self):
+        '''Return target path'''
+
         self._CheckPath()
         return self._Target

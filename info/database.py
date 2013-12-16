@@ -1,3 +1,5 @@
+'''Information about the database system'''
+
 import os
 import option
 

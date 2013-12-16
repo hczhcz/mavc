@@ -1,3 +1,5 @@
+'''The lock system, to keep some files from deletion'''
+
 from mavc import info
 
 class BaseLock(object):

@@ -1,3 +1,5 @@
+'''Data objects, to contain data, can be stored in the database'''
+
 from mavc import info
 
 class BaseDataType(object):

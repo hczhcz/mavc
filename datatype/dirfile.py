@@ -1,3 +1,5 @@
+'''Dir and file data, data object with IO'''
+
 import os
 import fcntl
 from mavc import info

@@ -1,3 +1,5 @@
+'''Option, mostly about the database system and the frontend'''
+
 import os
 import datetime
 

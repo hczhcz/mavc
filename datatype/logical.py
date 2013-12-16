@@ -1,3 +1,5 @@
+'''Logical data, for the version control model'''
+
 from mavc import info
 import abstract
 

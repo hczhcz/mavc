@@ -1,3 +1,5 @@
+'''The implementation of the log system'''
+
 from mavc import info
 from mavc import interface
 
@@ -74,8 +76,9 @@ class MultiLog(object):
     def __getattr__(self, name):
         '''Iterate the list when a method is called'''
 
-        # Make a closure to apply the call
         def DynamicCall(msg):
+            '''Make a closure to apply the call'''
+
             for item in self._LogList:
                 getattr(item, name)(msg)
 

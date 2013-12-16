@@ -1,3 +1,5 @@
+'''Initialization, load modules'''
+
 import info
 import interface
 import datatype

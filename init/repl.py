@@ -1,3 +1,5 @@
+'''REPL, an interactive console'''
+
 import code
 
 def Repl(target):
