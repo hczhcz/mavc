@@ -22,6 +22,18 @@ def Read(identifier, target = ''):
 
     return info.Database.Pull(identifier, False, target)
 
+def Lock(identifier):
+    '''Lock an identifier'''
+
+    info.Lock.Lock(identifier)
+    return identifier
+
+def Unlock(identifier):
+    '''Unlock an identifier'''
+
+    info.Lock.Unlock(identifier)
+    return identifier
+
 def List():
     '''List all locked data'''
 

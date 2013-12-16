@@ -7,5 +7,5 @@ __all__ = [
     # Add all functions here
     'Package', 'Commit', 'CommitTimed', 'Task', 'Dir', 'File',
     'Last', 'Walk',
-    'Push', 'Pull', 'Write', 'Read', 'List', 'Exit'
+    'Push', 'Pull', 'Write', 'Read', 'Lock', 'Unlock', 'List', 'Exit'
 ]
