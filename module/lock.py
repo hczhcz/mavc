@@ -5,6 +5,7 @@ import fcntl
 from mavc import info
 from mavc import interface
 
+
 class FileLock(interface.BaseLock):
     '''Implementation of the lock system
     Stored as files

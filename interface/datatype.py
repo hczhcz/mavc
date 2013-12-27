@@ -2,6 +2,7 @@
 
 from mavc import info
 
+
 class BaseDataType(object):
     '''Base class of data
     Abstract, override methods to impletment this class'''

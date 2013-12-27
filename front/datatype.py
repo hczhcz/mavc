@@ -3,6 +3,7 @@
 from mavc import info
 from mavc import datatype
 
+
 def _Expand(data):
     '''If data is a list or set in another list or set, expand it'''
 
@@ -13,11 +14,13 @@ def _Expand(data):
     else:
         return data
 
+
 def Package(comment, *data):
     '''Create package data object'''
 
     info.LastData = datatype.PackageDataType(comment, set(_Expand(data)))
     return info.LastData
+
 
 def Commit(comment, *data):
     '''Create commit data object'''
@@ -25,11 +28,13 @@ def Commit(comment, *data):
     info.LastData = datatype.CommitDataType(comment, set(_Expand(data)))
     return info.LastData
 
+
 def CommitTimed(comment, time, *data):
     '''Create commit data object and set time stamp manually'''
 
     info.LastData = datatype.CommitDataType(comment, set(_Expand(data)), time)
     return info.LastData
+
 
 def Task(comment, *data):
     '''Create task data object'''
@@ -37,11 +42,13 @@ def Task(comment, *data):
     info.LastData = datatype.TaskDataType(comment, list(_Expand(data)))
     return info.LastData
 
+
 def Dir(targetdir, *data):
     '''Create dir data object'''
 
     info.LastData = datatype.DirDataType(targetdir, set(_Expand(data)))
     return info.LastData
+
 
 def File(targetfile):
     '''Create file data object'''

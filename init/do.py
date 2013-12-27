@@ -4,6 +4,7 @@ from mavc import info
 from mavc import module
 import dirinit
 
+
 def Init():
     '''Do initialization of the whole system'''
 

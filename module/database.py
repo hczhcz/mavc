@@ -7,6 +7,7 @@ import zlib
 from mavc import info
 from mavc import interface
 
+
 class FileDB(interface.BaseDB):
     '''Database based on local files
     Work under current dir
@@ -87,7 +88,9 @@ class FileDB(interface.BaseDB):
                     fcntl.flock(File, fcntl.LOCK_EX)
                     File.write(StrFileData)
             except:
-                info.Log.Error('Can not write temporary file ' + TempIdentifier)
+                info.Log.Error(
+                    'Can not write temporary file ' + TempIdentifier
+                )
 
             # Apply from temporary file
             try:
@@ -186,6 +189,7 @@ class FileDB(interface.BaseDB):
                 info.Log.Error('Can not defrag ' + fragitem)
 
         info.Log.Progress('Defragment finished')
+
 
 class PickleZlibDB(FileDB):
     '''Implementation of the database system

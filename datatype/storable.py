@@ -3,6 +3,7 @@
 from mavc import info
 from mavc import interface
 
+
 class StorableDataType(interface.BaseDataType):
     '''Storable data
     Use flag _Stored to mark'''
@@ -48,7 +49,9 @@ class StorableDataType(interface.BaseDataType):
         if self._Stored:
             return set(self._DoRef())
         else:
-            info.Log.InternalError('Can not read identifier from restored data')
+            info.Log.InternalError(
+                'Can not read identifier from restored data'
+            )
 
     def AllRef(self):
         Result = set()

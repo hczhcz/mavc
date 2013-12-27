@@ -3,6 +3,7 @@
 import os
 from mavc import info
 
+
 def _EnsureDir(targetdir):
     '''Check tool dir and initialize if necessary'''
 
@@ -12,6 +13,7 @@ def _EnsureDir(targetdir):
             os.mkdir(targetdir)
         except:
             info.Log.Error('Can not create tool dir ' + targetdir)
+
 
 def EnsureAllDir():
     '''Call _EnsureDir() to check all tool dirs'''

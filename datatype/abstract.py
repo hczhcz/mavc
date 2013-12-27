@@ -3,6 +3,7 @@
 from mavc import info
 import storable
 
+
 class RawDataType(storable.StorableDataType):
     '''Raw data
     Can store almost anything
@@ -35,6 +36,7 @@ class RawDataType(storable.StorableDataType):
     def _DoRef(self):
         return set()
 
+
 class CommentDataType(storable.StorableDataType):
     '''Data with comment
     Comment should be string'''
@@ -57,6 +59,7 @@ class CommentDataType(storable.StorableDataType):
         '''Return comment'''
 
         return self._Comment
+
 
 class SetDataType(storable.StorableDataType):
     '''Unique list (set) of identifier
@@ -98,6 +101,7 @@ class SetDataType(storable.StorableDataType):
     def _DoRef(self):
         return self._IDData
 
+
 class ListDataType(storable.StorableDataType):
     '''Ordered list of identifier
     Check type of input data'''
@@ -137,6 +141,7 @@ class ListDataType(storable.StorableDataType):
 
     def _DoRef(self):
         return self._IDData
+
 
 class DirFileDataType(storable.StorableDataType):
     '''Dir or file

@@ -5,6 +5,7 @@ import fcntl
 from mavc import info
 import abstract
 
+
 class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
     '''Dir data
     Check dir on push
@@ -54,6 +55,7 @@ class DirDataType(abstract.DirFileDataType, abstract.SetDataType):
 
         # With new dir do pull
         super(DirDataType, self)._DoOnPull(NewDir)
+
 
 class FileDataType(abstract.DirFileDataType):
     '''File data

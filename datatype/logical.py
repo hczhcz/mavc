@@ -3,6 +3,7 @@
 from mavc import info
 import abstract
 
+
 class PackageDataType(abstract.CommentDataType, abstract.SetDataType):
     '''Package, contains multiple data
     Stored as a set, members are unique and not ordered'''
@@ -18,6 +19,7 @@ class PackageDataType(abstract.CommentDataType, abstract.SetDataType):
     def AsCode(self):
         return 'PackageDataType(' + self._Comment\
             + ', ' + repr(self._Data) + ')'
+
 
 class CommitDataType(abstract.CommentDataType, abstract.SetDataType):
     '''Commit, like a package but with a time stamp
@@ -44,6 +46,7 @@ class CommitDataType(abstract.CommentDataType, abstract.SetDataType):
     def AsCode(self):
         return 'CommitDataType(' + self._Comment + ', ' + repr(self._Data)\
             + self._Time + ')'
+
 
 class TaskDataType(abstract.CommentDataType, abstract.ListDataType):
     '''Task, contains multiple data

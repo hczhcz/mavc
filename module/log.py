@@ -3,6 +3,7 @@
 from mavc import info
 from mavc import interface
 
+
 class TextLog(interface.BaseLog):
     '''Log expressed in plain text
     Override AddText() method to implement
@@ -33,6 +34,7 @@ class TextLog(interface.BaseLog):
         self._AddText('Internal error', msg)
         super(TextLog, self).InternalError(msg)
 
+
 class ConsoleLog(TextLog):
     '''Implementation of the log system, to print log to console
     Use standard IO
@@ -46,6 +48,7 @@ class ConsoleLog(TextLog):
         if not isinstance(text, str):
             text = str(text)
         print(info.TimeInFormat() + ' ' + title + ': ' + text)
+
 
 class SimpleConsoleLog(TextLog):
     '''Implementation of the log system
@@ -66,6 +69,7 @@ class SimpleConsoleLog(TextLog):
         if not isinstance(text, str):
             text = str(text)
         print(title + ': ' + text)
+
 
 class MultiLog(object):
     '''A wrapper to use multiple log system

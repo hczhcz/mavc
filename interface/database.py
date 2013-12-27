@@ -2,6 +2,7 @@
 
 from mavc import info
 
+
 class BaseDB(object):
     '''Base class of the database system
     Abstract, override methods to impletment this class'''

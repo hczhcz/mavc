@@ -2,6 +2,7 @@
 
 from mavc import info
 
+
 class BaseLock(object):
     '''Base class of the lock system
     Lock should be additive (two lock need two unlock)

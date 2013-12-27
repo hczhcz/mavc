@@ -2,6 +2,7 @@
 
 import code
 
+
 def Repl(target):
     '''Run a REPL (interactive console) with local variables'''
 
