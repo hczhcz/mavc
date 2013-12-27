@@ -3,7 +3,9 @@
 import os
 import re
 from mavc import info
-from mavc import datatype
+from mavc import datatype as coredatatype
+import datatype
+
 
 def Last():
     '''Last generated data object'''
@@ -48,7 +50,7 @@ def Walk(target, ignore = '(.*' + os.sep + ')?\\..*'):
 def Continue(task, data):
     '''Append to an existing task data object'''
 
-    if isinstance(task, datatype.TaskDataType):
+    if isinstance(task, coredatatype.TaskDataType):
         task.Data().append(data)
         info.LastData = task
     else:
