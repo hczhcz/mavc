@@ -6,6 +6,6 @@ from action import *
 __all__ = [
     # Add all functions here
     'Package', 'Commit', 'CommitTimed', 'Task', 'Dir', 'File',
-    'Last', 'Walk',
+    'Last', 'Walk', 'Continue',
     'Push', 'Pull', 'Write', 'Read', 'Lock', 'Unlock', 'List', 'Exit'
 ]
