@@ -13,7 +13,7 @@ def Last():
     return info.LastData
 
 
-def Walk(target, ignore = '(.*' + os.sep + ')?\\..*'):
+def Walk(target = os.curdir, ignore = '.*' + os.sep + '\\..*|\\.[^' + os.sep + '].*'):
     '''Walking and create data objects
     Select path and file using ignore rule (regular expression or function)
     Return a set'''
