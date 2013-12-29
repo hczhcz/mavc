@@ -13,9 +13,9 @@ def Last():
     return info.LastData
 
 
-def Walk(target = os.curdir, ignore = '.*' + os.sep + '\\..*|\\.[^' + os.sep + '].*'):
+def Walk(target = os.curdir, ignore = info.IgnoreRule):
     '''Walking and create data objects
-    Select path and file using ignore rule (regular expression or function)
+    Select path and file using skipping rule (regular expression or function)
     Return a set'''
 
     # Compile the ignore rule

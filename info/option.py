@@ -35,3 +35,6 @@ IsDirFile = lambda x: not set(x) <= {'.', '*', '?', '+', ':'}\
     and not os.sep in x\
     and x != os.curdir\
     and x != os.pardir
+
+# Default file skipping rule (for front.Walk funtion)
+IgnoreRule = '.*' + os.sep + '\\..*|\\.[^' + os.sep + '].*'
