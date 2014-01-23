@@ -56,7 +56,7 @@ def Walk(target = os.curdir, *ignore):
     return info.LastData
 
 
-def Continue(task, data):
+def Submit(task, data = None):
     '''Append to an existing task data object'''
 
     if isinstance(task, coredatatype.TaskDataType):
