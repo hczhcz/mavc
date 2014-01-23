@@ -3,9 +3,11 @@
 from datatype import *
 from datatypeex import *
 from action import *
+from misc import *
 __all__ = [
     # Add all functions here
     'Package', 'Commit', 'CommitTimed', 'Task', 'Dir', 'File',
-    'Last', 'Walk', 'Continue',
-    'Push', 'Pull', 'Write', 'Read', 'Lock', 'Unlock', 'List', 'Exit'
+    'Walk', 'Continue',
+    'Push', 'Pull', 'Write', 'Read', 'Lock', 'Unlock', 'List',
+    'Last', 'Repl', 'Help', 'Exit'
 ]

@@ -45,9 +45,3 @@ def List():
     '''List all locked data'''
 
     return info.Database.PullLocked()
-
-
-def Exit():
-    '''Exit, wrapper of exit(), useful in REPL'''
-
-    exit()

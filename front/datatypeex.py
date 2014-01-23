@@ -7,12 +7,6 @@ from mavc import datatype as coredatatype
 import datatype
 
 
-def Last():
-    '''Last generated data object'''
-
-    return info.LastData
-
-
 def Walk(target = os.curdir, ignore = info.IgnoreRule):
     '''Walking and create data objects
     Select path and file using skipping rule (regular expression or function)
