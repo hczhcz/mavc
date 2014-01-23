@@ -19,7 +19,7 @@ class FileLock(interface.BaseLock):
             info.Log.InternalError('Bad identifier')
 
         try:
-            with open(os.path.join(info.LockDir, identifier), 'wb+') as File:
+            with open(os.path.join(info.LockDir, identifier), 'rb+') as File:
                 fcntl.flock(File, fcntl.LOCK_EX)
 
                 LockData = File.read()

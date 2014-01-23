@@ -29,7 +29,7 @@ Verbose = False
 FriendlyRepr = True
 
 # Format of time, ISO by default
-TimeInFormat = datetime.datetime.now().isoformat
+TimeInFormat = lambda: datetime.datetime.now().isoformat()
 
 # Check file and dir name
 IsDirFile = lambda x: not set(x) <= {'.', '*', '?', '+', ':'}\
