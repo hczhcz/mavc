@@ -3,8 +3,11 @@
 from mavc import info
 
 
-def Push(data, target = ''):
+def Push(data = None, target = ''):
     '''Push data to the database'''
+
+    if data is None:
+        data = info.LastData
 
     return info.Database.Push(data, True, target)
 
@@ -12,11 +15,16 @@ def Push(data, target = ''):
 def Pull(identifier, target = ''):
     '''Pop data from the database'''
 
-    return info.Database.Pull(identifier, True, target)
+    info.LastData = info.Database.Pull(identifier, True, target)
+
+    return info.LastData
 
 
-def Write(data, target = ''):
+def Write(data = None, target = ''):
     '''Push data to the database without doing action'''
+
+    if data is None:
+        data = info.LastData
 
     return info.Database.Push(data, False, target)
 
@@ -24,7 +32,9 @@ def Write(data, target = ''):
 def Read(identifier, target = ''):
     '''Pop data from the database without doing action'''
 
-    return info.Database.Pull(identifier, False, target)
+    info.LastData = info.Database.Pull(identifier, False, target)
+
+    return info.LastData
 
 
 def Lock(identifier):

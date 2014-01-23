@@ -7,6 +7,9 @@ from mavc import datatype
 def _Expand(data):
     '''If data is a list or set in another list or set, expand it'''
 
+    if len(data) == 0:
+        data = [info.LastData]
+
     if len(data) == 1 and (
         isinstance(data[0], set) or isinstance(data[0], list)
     ):

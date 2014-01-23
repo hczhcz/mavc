@@ -60,6 +60,9 @@ def Submit(task, data = None):
     '''Append to an existing task data object'''
 
     if isinstance(task, coredatatype.TaskDataType):
+        if data is None:
+            data = info.LastData
+
         task.Data().append(data)
         info.LastData = task
     else:
