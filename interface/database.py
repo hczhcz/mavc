@@ -30,7 +30,7 @@ class BaseDB(object):
 
         pass
 
-    def Defrag(self):
+    def GarbageCollection(self):
         '''Delete unaccessable data in the database'''
 
         pass

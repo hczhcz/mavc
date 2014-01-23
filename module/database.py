@@ -153,42 +153,42 @@ class FileDB(interface.BaseDB):
     def PullLocked(self):
         return {self.Pull(item, False, None) for item in info.Lock.AllLocked()}
 
-    def Defrag(self):
-        info.Log.Message('Generating frag list')
+    def GarbageCollection(self):
+        info.Log.Message('Generating garbage list')
 
-        # Assumed everything to be frag at first
+        # Assumed everything to be garbage at first
         try:
-            Frag = set(os.listdir(info.StoreDir))
+            Garbage = set(os.listdir(info.StoreDir))
         except:
             info.Log.Error('Can not list database dir')
 
-        def NotFrag(item):
-            '''Remove items from the frag list'''
+        def NotGarbage(item):
+            '''Remove items from the garbage list'''
 
-            if item in Frag:
-                Frag.remove(item)
+            if item in Garbage:
+                Garbage.remove(item)
                 Ref = self.Pull(item, False, None).Ref()
                 for refitem in Ref:
-                    NotFrag(refitem)
+                    NotGarbage(refitem)
 
         for item in info.Lock.AllLocked():
-            NotFrag(item)
+            NotGarbage(item)
 
-        info.Log.Hint('Total frag ' + str(len(Frag)))
-        info.Log.Message('Move frag to ' + info.FragDir)
+        info.Log.Hint('Total garbage ' + str(len(Garbage)))
+        info.Log.Message('Move garbage to ' + info.GarbageDir)
 
-        for fragitem in Frag:
-            info.Log.Progress('Found frag ' + fragitem)
+        for garbageitem in Garbage:
+            info.Log.Progress('Found garbage ' + garbageitem)
             try:
                 os.rename(
-                    os.path.join(info.StoreDir, fragitem),
-                    os.path.join(info.FragDir, fragitem)
+                    os.path.join(info.StoreDir, garbageitem),
+                    os.path.join(info.GarbageDir, garbageitem)
                 )
-                info.Log.Message('Frag moved ' + fragitem)
+                info.Log.Message('Garbage moved ' + garbageitem)
             except:
-                info.Log.Error('Can not defrag ' + fragitem)
+                info.Log.Error('Can not move ' + garbageitem)
 
-        info.Log.Progress('Defragment finished')
+        info.Log.Progress('GC finished')
 
 
 class PickleZlibDB(FileDB):

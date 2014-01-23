@@ -46,7 +46,7 @@ class BaseDataType(object):
 
     def Ref(self):
         '''Return a set of identifier that needed (referred) by this object
-        For defragment only, work with Pull(..., doaction = False)'''
+        For GC only, work with Pull(..., doaction = False)'''
 
         pass
 
