@@ -7,16 +7,22 @@ from mavc import datatype as coredatatype
 import datatype
 
 
-def Walk(target = os.curdir, ignore = info.IgnoreRule):
+def Walk(target = os.curdir, *ignore):
     '''Walking and create data objects
     Select path and file using skipping rule (regular expression or function)
     Return a set'''
 
-    # Compile the ignore rule
-    # Regular expression to lambda
-    if isinstance(ignore, str):
-        ReObject = re.compile(ignore)
-        ignore = ReObject.match
+    if len(ignore) == 1 and isinstance(ignore[0], set):
+        # Use the ignore rule
+        ignore = ignore[0]
+    else:
+        # Compile the ignore rule
+        # Regular expression to function
+        ignore = {
+            re.compile(item).match if isinstance(item, str) else item
+            for item in ignore
+        }
+        ignore.add(info.IgnoreRule)
 
     info.Log.Message('Scanning dir ' + target)
 
@@ -30,7 +36,14 @@ def Walk(target = os.curdir, ignore = info.IgnoreRule):
         NewPath = os.path.join(target, item)
 
         # Checking
-        if not ignore(NewPath):
+        refound = False
+        for reitem in ignore:
+            if reitem(NewPath):
+                refound = True
+                break
+
+        # Checking
+        if not refound:
             info.Log.Message('Accepted path ' + NewPath)
             if os.path.isdir(NewPath):
                 # Is dir

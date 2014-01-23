@@ -1,6 +1,7 @@
 '''Option, mostly about the database system and the frontend'''
 
 import os
+import re
 import datetime
 
 # Do not change options about database if database is already created
@@ -37,4 +38,4 @@ IsDirFile = lambda x: not set(x) <= {'.', '*', '?', '+', ':'}\
     and x != os.pardir
 
 # Default file skipping rule (for front.Walk funtion)
-IgnoreRule = '.*' + os.sep + '\\..*|\\.[^' + os.sep + '].*'
+IgnoreRule = re.compile('.*' + os.sep + '\\..*|\\.[^' + os.sep + '].*').match
