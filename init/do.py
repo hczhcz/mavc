@@ -5,7 +5,7 @@ from mavc import module
 import dirinit
 
 
-def Init():
+def Init(namespace):
     '''Do initialization of the whole system'''
 
     # A MultiLog() as the root of the log system
@@ -31,3 +31,7 @@ def Init():
     # The database system
     # Pickle and Zlib used by default
     info.Database = module.PickleZlibDB()
+
+    # The namespace of the frontend
+    # Use globals()
+    info.Globals = namespace

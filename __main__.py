@@ -7,7 +7,4 @@ import os
 sys.path.append(os.path.join(sys.path[0], os.pardir))
 from mavc import *
 
-del os
-del sys
-
-init.Repl(globals())
+init.Repl(info.Globals)

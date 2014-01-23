@@ -8,4 +8,4 @@ import init
 import front
 from front import *
 
-init.Init()
+init.Init(globals())
