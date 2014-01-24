@@ -1,7 +1,7 @@
 MAVC
 ====
 
-A Python-based lightweight revision controller.
+A Python-based lightweight revision control system.
 
 Run as REPL
 ----

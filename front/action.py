@@ -3,17 +3,25 @@
 from mavc import info
 
 
-def Push(data = None, target = ''):
+def Push(data = None, lock = False, target = ''):
     '''Push data to the database'''
 
     if data is None:
         data = info.LastData
 
-    return info.Database.Push(data, True, target)
+    identifier = info.Database.Push(data, True, target)
+
+    if lock:
+        info.Lock.Lock(identifier)
+
+    return identifier
 
 
-def Pull(identifier, target = ''):
+def Pull(identifier, unlock = False, target = ''):
     '''Pop data from the database'''
+
+    if unlock:
+        info.Lock.Unlock(identifier)
 
     info.LastData = info.Database.Pull(identifier, True, target)
 
