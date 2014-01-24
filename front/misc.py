@@ -10,6 +10,12 @@ def Last():
     return info.LastData
 
 
+def GarbageCollection():
+    '''Do garbage collection'''
+
+    info.Database.GarbageCollection()
+
+
 def Repl():
     '''Run an interactive console'''
 

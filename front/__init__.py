@@ -9,5 +9,5 @@ __all__ = [
     'Package', 'Commit', 'CommitTimed', 'Task', 'Dir', 'File',
     'Walk', 'Submit',
     'Push', 'Pull', 'Write', 'Read', 'Lock', 'Unlock', 'List',
-    'Last', 'Repl', 'Help', 'Exit'
+    'Last', 'GarbageCollection', 'Repl', 'Help', 'Exit'
 ]
