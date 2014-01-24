@@ -27,7 +27,7 @@ Import the module:
 Functions:
 
     >>> dir(mavc)
-    ['Commit', 'CommitTimed', 'Submit', 'Dir', 'Exit', 'File', 'Help', 'Last', 'List', 'Lock', 'Package', 'Pull', 'Push', 'Read', 'Repl', 'Task', 'Unlock', 'Walk', 'Write', ...]
+    ['Commit', 'CommitTimed', 'Dir', 'Exit', 'File', 'GarbageCollection', 'Help', 'Last', 'List', 'Lock', 'Package', 'Pull', 'Push', 'Read', 'Repl', 'Submit', 'SubmitDB', 'Task', 'Unlock', 'Walk', 'Write', ...]
 
 Add files and dirs:
 
@@ -113,7 +113,19 @@ Restore data:
 
 Besides, `Write()` is `Push()` without reading file, and `Read()` is `Pull()` without writting file.
 
-Lock data so that it will not be deleted:
+Update a task from the database:
+
+    >>> Push(Task('dev', Commit('init', File('foo'))))
+    ...
+    '0x66666666'
+    >>> SubmitDB('0x66666666', Commit('test', File('bar')))
+    ...
+    '0x77777777'
+    >>> Pull('0x77777777').Data()
+    ...
+    [Commit init, Commit test]
+
+Lock data so that it will not be deleted (see `GarbageCollection()`):
 
     >>> Lock('0x55555555')
     Progress: Locked 0x55555555 to 1
@@ -132,14 +144,17 @@ List all locked:
 
 And...
 
-    >>> Help(List)
-    'List all locked data'
+    >>> GarbageCollection()
+    Hint: Total garbage 0
+    Progress: GC finished
     >>> Repl()
     
      --------------------------
     | MAVC Interactive Console |
      --------------------------
     >>> # Repl() is useful in scripts
+    >>> Help(List)
+    'List all locked data'
     >>> Exit()
 
 Use in scripts
