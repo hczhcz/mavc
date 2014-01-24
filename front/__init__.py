@@ -7,7 +7,7 @@ from misc import *
 __all__ = [
     # Add all functions here
     'Package', 'Commit', 'CommitTimed', 'Task', 'Dir', 'File',
-    'Walk', 'Submit',
+    'Walk', 'Submit', 'SubmitDB',
     'Push', 'Pull', 'Write', 'Read', 'Lock', 'Unlock', 'List',
     'Last', 'GarbageCollection', 'Repl', 'Help', 'Exit'
 ]

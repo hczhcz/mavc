@@ -69,3 +69,14 @@ def Submit(task, data = None):
         info.Log.Error('Not a task')
 
     return info.LastData
+
+def SubmitDB(identifier, data = None, lock = False, target = ''):
+    '''Read, submit and write'''
+
+    task = info.Database.Pull(identifier, False, target)
+    newtask = Submit(task, data)
+    newidentifier = info.Database.Push(newtask, False, target)
+
+    if lock:
+        info.Lock.Lock(newidentifier)
+        info.Lock.Unlock(identifier)
