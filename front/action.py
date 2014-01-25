@@ -79,8 +79,12 @@ def Unlock(identifier = None):
     return identifier
 
 
-def List():
-    '''List()
+def List(doprint = True):
+    '''List([doprint: bool])
     List all locked data'''
 
-    return info.Database.PullLocked()
+    if doprint:
+        for item in info.Database.PullLocked():
+            print(item)
+    else:
+        return info.Database.PullLocked()

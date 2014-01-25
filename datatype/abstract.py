@@ -84,11 +84,16 @@ class SetDataType(storable.StorableDataType):
             info.Log.InternalError('Input is not a set')
 
     def AsStrDeep(self, front = ''):
-        return front + self.AsStr() + '\n'\
-            + '\n'.join([
-                item.AsStrDeep(front + info.DeepObjStrHead)
-                for item in (self._IDData if self._Stored else self._Data)
+        NextFront = front + info.DeepObjStrHead
+
+        return front + self.AsStr() + '\n' + (
+            NextFront + ('\n' + NextFront).join(self._IDData)
+            if self._Stored
+            else '\n'.join([
+                item.AsStrDeep(NextFront)
+                for item in self._Data
             ])
+        )
 
     def Data(self):
         '''Return data (set)'''
@@ -132,11 +137,16 @@ class ListDataType(storable.StorableDataType):
             info.Log.InternalError('Input is not a list')
 
     def AsStrDeep(self, front = ''):
-        return front + self.AsStr() + '\n'\
-            + '\n'.join([
-                item.AsStrDeep(front + info.DeepObjStrHead)
-                for item in (self._IDData if self._Stored else self._Data)
+        NextFront = front + info.DeepObjStrHead
+
+        return front + self.AsStr() + '\n' + (
+            NextFront + ('\n' + NextFront).join(self._IDData)
+            if self._Stored
+            else '\n'.join([
+                item.AsStrDeep(NextFront)
+                for item in self._Data
             ])
+        )
 
     def Data(self):
         '''Return data (list)'''
