@@ -91,7 +91,9 @@ Commit and add to a task:
     >>> Submit(t)
     Task release
 
-Store data to the local database (dir `./.mavc`):
+Now you created some data objects. Then you can store them.
+
+Store data into the local database (dir `./.mavc`):
 
     >>> Push(t)
     Progress: Database stored 0x11111111
@@ -100,6 +102,10 @@ Store data to the local database (dir `./.mavc`):
     Progress: Database stored 0x44444444
     Progress: Database stored 0x55555555
     '0x55555555'
+
+`0x55555555` is the identifier of `Task('release')`.
+
+If SHA-1 hash function is enabled (see `info/option.py`), the identifier will be much longer.
 
 Restore data:
 
@@ -126,6 +132,8 @@ Update a task from the database:
     >>> Pull().Data()
     ...
     [Commit init, Commit test]
+
+Data is stored in `.../.mavc`.
 
 Lock data so that it will not be deleted (see `GarbageCollection()`):
 
@@ -169,6 +177,8 @@ Script file:
     Dir('foo', File('bar'), File('baz'))
     Package('pkg1')
     Repl()
+
+Rename it as `.mavc_scan.py`.
 
 Run it:
 

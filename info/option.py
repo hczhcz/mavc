@@ -21,6 +21,9 @@ DoCompress = BinaryStore
 # Zlib compression level (0 to 9)
 CompressLevel = 6
 
+# Use SHA-1 instead of Alder-32
+StrongHash = True
+
 # Print verbose message
 Verbose = False
 

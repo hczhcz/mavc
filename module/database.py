@@ -4,6 +4,7 @@ import os
 import fcntl
 import cPickle as pickle
 import zlib
+import hashlib
 from mavc import info
 from mavc import interface
 
@@ -200,11 +201,15 @@ class PickleZlibDB(FileDB):
     def __init__(self):
         pass
 
-    # Return a string like 0x12345678
+    # Calculate hash value, return result as string
     def _StrHash(self, data):
         try:
-            # Hex value of Adler-32 checksum
-            return hex(zlib.adler32(data) & 0xffffffff)
+            if info.StrongHash:
+                # Hex value of SHA-1 checksum
+                return hashlib.sha1(data).hexdigest()
+            else:
+                # Hex value of Adler-32 checksum
+                return hex(zlib.adler32(data) & 0xffffffff)
         except:
             info.Log.InternalError('Zlib Adler-32 Hash failed')
 
