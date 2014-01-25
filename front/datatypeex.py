@@ -7,8 +7,8 @@ from mavc import datatype as coredatatype
 import datatype
 
 
-def Walk(target = os.curdir, *ignore):
-    '''Walk([target: str[, ignore1, ignore2, ...]])
+def Walk(target = os.curdir, wrap = True, *ignore):
+    '''Walk([target: str[, wrap: bool[, ignore1, ignore2, ...]]])
     Walking and create data objects
     Select path and file using skipping rule (regular expression or function)
     Return a set'''
@@ -48,10 +48,16 @@ def Walk(target = os.curdir, *ignore):
             info.Log.Message('Accepted path ' + NewPath)
             if os.path.isdir(NewPath):
                 # Is dir
-                Result.add(datatype.Dir(item, Walk(NewPath, ignore)))
+                Result.add(datatype.Dir(item, Walk(NewPath, False, ignore)))
             elif os.path.isfile(NewPath):
                 # Is file
                 Result.add(datatype.File(item))
+
+    if wrap:
+        if len(Result) == 1:
+            Result = list(Result)[0]
+        else:
+            Result = datatype.Package('Walk ' + target, Result)
 
     info.LastData = Result
     return info.LastData
