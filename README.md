@@ -44,17 +44,19 @@ Or scan dirs and files (you can also ignore some files):
     Progress: File baz
     Progress: File bar
     Progress: Dir foo
-    set([Dir foo
+    Dir foo
         File bar
-        File baz])
-    >>> Walk('.', '.*z')
+        File baz
+    >>> Walk('.', True, '.*z')
     Progress: File bar
     Progress: Dir foo
-    set([Dir foo
-        File bar])
-    >>> Walk('.', '.*b..')
+    Dir foo
+        File bar
+    >>> Walk('.', False, '.*b..')
     Progress: Dir foo
     set([Dir foo])
+
+`Walk(..., False, ...)` will return a set.
 
 Packages (not necessary):
 
@@ -169,7 +171,7 @@ Unlock:
 List all locked:
 
     >>> List()
-    set([Task release])
+    Task release
 
 And...
 

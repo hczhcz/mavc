@@ -71,12 +71,14 @@ def Submit(task, data = None):
         if data is None:
             data = info.LastData
 
-        task.Data().append(data)
-        info.LastData = task
+        if isinstance(data, coredatatype.StorableDataType):
+            task.Data().append(data)
+        else:
+            info.Log.Error('Bad data to submit')
     else:
         info.Log.Error('Not a task')
 
-    return info.LastData
+    return task
 
 
 def SubmitDB(identifier, data = None, lock = False, target = ''):
