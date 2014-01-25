@@ -8,7 +8,8 @@ import datatype
 
 
 def Walk(target = os.curdir, *ignore):
-    '''Walking and create data objects
+    '''Walk([target: str[, ignore1, ignore2, ...]])
+    Walking and create data objects
     Select path and file using skipping rule (regular expression or function)
     Return a set'''
 
@@ -57,7 +58,8 @@ def Walk(target = os.curdir, *ignore):
 
 
 def Submit(task, data = None):
-    '''Append to an existing task data object'''
+    '''Submit(task[, data])
+    Append to an existing task data object'''
 
     if isinstance(task, coredatatype.TaskDataType):
         if data is None:
@@ -71,7 +73,8 @@ def Submit(task, data = None):
     return info.LastData
 
 def SubmitDB(identifier, data = None, lock = False, target = ''):
-    '''Read, submit and write'''
+    '''SubmitDB(identifier[, data[, lock: bool[, target: str]]])
+    Read, submit and write'''
 
     task = info.Database.Pull(identifier, False, target)
     Submit(task, data)

@@ -4,7 +4,8 @@ from mavc import info
 
 
 def Push(data = None, lock = False, target = ''):
-    '''Push data to the database'''
+    '''Push([data[, lock: bool[, target: str]]])
+    Push data to the database'''
 
     if data is None:
         data = info.LastData
@@ -18,7 +19,8 @@ def Push(data = None, lock = False, target = ''):
 
 
 def Pull(identifier = None, unlock = False, target = ''):
-    '''Pop data from the database'''
+    '''Pull([identifier[, unlock: bool[, target: str]]])
+    Pop data from the database'''
 
     if identifier is None:
         identifier = info.LastData
@@ -32,7 +34,8 @@ def Pull(identifier = None, unlock = False, target = ''):
 
 
 def Write(data = None, target = ''):
-    '''Push data to the database without doing action'''
+    '''Write([data[, target: str]])
+    Push data to the database without doing action'''
 
     if data is None:
         data = info.LastData
@@ -43,7 +46,8 @@ def Write(data = None, target = ''):
 
 
 def Read(identifier = None, target = ''):
-    '''Pop data from the database without doing action'''
+    '''Read([identifier[, target: str]])
+    Pop data from the database without doing action'''
 
     if identifier is None:
         identifier = info.LastData
@@ -54,7 +58,8 @@ def Read(identifier = None, target = ''):
 
 
 def Lock(identifier = None):
-    '''Lock an identifier'''
+    '''Lock([identifier])
+    Lock an identifier'''
 
     if identifier is None:
         identifier = info.LastData
@@ -64,7 +69,8 @@ def Lock(identifier = None):
 
 
 def Unlock(identifier = None):
-    '''Unlock an identifier'''
+    '''Unlock([identifier])
+    Unlock an identifier'''
 
     if identifier is None:
         identifier = info.LastData
@@ -74,6 +80,7 @@ def Unlock(identifier = None):
 
 
 def List():
-    '''List all locked data'''
+    '''List()
+    List all locked data'''
 
     return info.Database.PullLocked()

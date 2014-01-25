@@ -19,42 +19,48 @@ def _Expand(data):
 
 
 def Package(comment, *data):
-    '''Create package data object'''
+    '''Package(comment[, data1, data2, ...])
+    Create package data object'''
 
     info.LastData = datatype.PackageDataType(comment, set(_Expand(data)))
     return info.LastData
 
 
 def Commit(comment, *data):
-    '''Create commit data object'''
+    '''Commit(comment[, data1, data2, ...])
+    Create commit data object'''
 
     info.LastData = datatype.CommitDataType(comment, set(_Expand(data)))
     return info.LastData
 
 
 def CommitTimed(comment, time, *data):
-    '''Create commit data object and set time stamp manually'''
+    '''CommitTimed(comment, time: str[, data1, data2, ...])
+    Create commit data object and set time stamp manually'''
 
     info.LastData = datatype.CommitDataType(comment, set(_Expand(data)), time)
     return info.LastData
 
 
 def Task(comment, *data):
-    '''Create task data object'''
+    '''Task(comment[, data1, data2, ...])
+    Create task data object'''
 
     info.LastData = datatype.TaskDataType(comment, list(_Expand(data)))
     return info.LastData
 
 
 def Dir(targetdir, *data):
-    '''Create dir data object'''
+    '''Dir(targetdir: str[, data1, data2, ...])
+    Create dir data object'''
 
     info.LastData = datatype.DirDataType(targetdir, set(_Expand(data)))
     return info.LastData
 
 
 def File(targetfile):
-    '''Create file data object'''
+    '''File(targetfile: str)
+    Create file data object'''
 
     info.LastData = datatype.FileDataType(targetfile)
     return info.LastData
