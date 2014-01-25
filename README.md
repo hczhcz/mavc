@@ -103,13 +103,15 @@ Store data to the local database (dir `./.mavc`):
 
 Restore data:
 
-    >>> Pull('0x55555555')
+    >>> Pull()
     Progress: Data restored 0x11111111
     Progress: Data restored 0x22222222
     Progress: Data restored 0x33333333
     Progress: Data restored 0x44444444
     Progress: Data restored 0x55555555
     Task release
+
+`Pull()`, `Pull('0x55555555')` and `Pull(Last())` are the same here.
 
 Besides, `Write()` is `Push()` without reading file, and `Read()` is `Pull()` without writting file.
 
@@ -121,19 +123,19 @@ Update a task from the database:
     >>> SubmitDB('0x66666666', Commit('test', File('bar')))
     ...
     '0x77777777'
-    >>> Pull('0x77777777').Data()
+    >>> Pull().Data()
     ...
     [Commit init, Commit test]
 
 Lock data so that it will not be deleted (see `GarbageCollection()`):
 
-    >>> Lock('0x55555555')
+    >>> Lock()
     Progress: Locked 0x55555555 to 1
     '0x55555555'
 
 Unlock:
 
-    >>> Unlock('0x55555555')
+    >>> Unlock()
     Progress: Unlocked 0x55555555 to 0
     '0x55555555'
 
