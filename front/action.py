@@ -9,16 +9,19 @@ def Push(data = None, lock = False, target = ''):
     if data is None:
         data = info.LastData
 
-    identifier = info.Database.Push(data, True, target)
+    info.LastData = info.Database.Push(data, True, target)
 
     if lock:
-        info.Lock.Lock(identifier)
+        info.Lock.Lock(info.LastData)
 
-    return identifier
+    return info.LastData
 
 
-def Pull(identifier, unlock = False, target = ''):
+def Pull(identifier = None, unlock = False, target = ''):
     '''Pop data from the database'''
+
+    if identifier is None:
+        identifier = info.LastData
 
     if unlock:
         info.Lock.Unlock(identifier)
@@ -34,26 +37,37 @@ def Write(data = None, target = ''):
     if data is None:
         data = info.LastData
 
-    return info.Database.Push(data, False, target)
+    info.LastData = info.Database.Push(data, False, target)
+
+    return info.LastData
 
 
-def Read(identifier, target = ''):
+def Read(identifier = None, target = ''):
     '''Pop data from the database without doing action'''
+
+    if identifier is None:
+        identifier = info.LastData
 
     info.LastData = info.Database.Pull(identifier, False, target)
 
     return info.LastData
 
 
-def Lock(identifier):
+def Lock(identifier = None):
     '''Lock an identifier'''
+
+    if identifier is None:
+        identifier = info.LastData
 
     info.Lock.Lock(identifier)
     return identifier
 
 
-def Unlock(identifier):
+def Unlock(identifier = None):
     '''Unlock an identifier'''
+
+    if identifier is None:
+        identifier = info.LastData
 
     info.Lock.Unlock(identifier)
     return identifier

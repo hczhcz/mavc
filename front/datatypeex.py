@@ -75,10 +75,10 @@ def SubmitDB(identifier, data = None, lock = False, target = ''):
 
     task = info.Database.Pull(identifier, False, target)
     Submit(task, data)
-    NewIdentifier = info.Database.Push(task, False, target)
+    info.LastData = info.Database.Push(task, False, target)
 
     if lock:
-        info.Lock.Lock(NewIdentifier)
+        info.Lock.Lock(info.LastData)
         info.Lock.Unlock(identifier)
 
-    return NewIdentifier
+    return info.LastData

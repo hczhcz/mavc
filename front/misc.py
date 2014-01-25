@@ -5,7 +5,7 @@ from mavc import init
 
 
 def Last():
-    '''Last generated data object'''
+    '''Last generated data object or identifier'''
 
     return info.LastData
 
@@ -23,9 +23,9 @@ def Repl():
 
 
 def Help(target):
-    '''Return doc string, wrapper of __doc__'''
+    '''Print doc string, wrapper of __doc__'''
 
-    return target.__doc__
+    print(target.__doc__)
 
 
 def Exit():
