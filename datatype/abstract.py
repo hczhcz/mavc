@@ -16,6 +16,10 @@ class RawDataType(storable.StorableDataType):
         info.Log.Progress(self.AsStr())
         info.Log.Hint('Raw data type for debug only')
 
+    def AsStrDeep(self, front = ''):
+        return front + self.AsStr() + '\n'\
+            + front + info.DeepObjStrHead + str(self._Data)
+
     def AsStr(self):
         return 'Raw data ' + str(self._Data)
 
@@ -79,6 +83,13 @@ class SetDataType(storable.StorableDataType):
         else:
             info.Log.InternalError('Input is not a set')
 
+    def AsStrDeep(self, front = ''):
+        return front + self.AsStr() + '\n'\
+            + '\n'.join([
+                item.AsStrDeep(front + info.DeepObjStrHead)
+                for item in (self._IDData if self._Stored else self._Data)
+            ])
+
     def Data(self):
         '''Return data (set)'''
 
@@ -119,6 +130,13 @@ class ListDataType(storable.StorableDataType):
             self._Data = data
         else:
             info.Log.InternalError('Input is not a list')
+
+    def AsStrDeep(self, front = ''):
+        return front + self.AsStr() + '\n'\
+            + '\n'.join([
+                item.AsStrDeep(front + info.DeepObjStrHead)
+                for item in (self._IDData if self._Stored else self._Data)
+            ])
 
     def Data(self):
         '''Return data (list)'''

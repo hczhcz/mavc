@@ -31,6 +31,12 @@ Verbose = False
 # Not really repr but print as readable string if true
 FriendlyRepr = True
 
+# Print data with children's data
+DeepObjStr = True
+
+# String in front of data for DeepObjStr
+DeepObjStrHead = '    '
+
 # Format of time, ISO by default
 TimeInFormat = lambda: datetime.datetime.now().isoformat()
 

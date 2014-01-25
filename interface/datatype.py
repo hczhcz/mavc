@@ -13,20 +13,33 @@ class BaseDataType(object):
     # Version, for compatibility checking, check by database system
     DataVer = info.Version
 
-    def __repr__(self):
-        '''Repr data as string'''
-
-        return self.AsStr() if info.FriendlyRepr else self.AsCode()
-
     def __str__(self):
         '''Cast data as string'''
 
-        return self.AsStr()
+        if info.DeepObjStr:
+            return self.AsStrDeep()
+        else:
+            return self.AsStr()
+
+    def __repr__(self):
+        '''Repr data as string'''
+
+        if info.FriendlyRepr:
+            return str(self)
+        else:
+            return self.AsCode()
+
+    def AsStrDeep(self, front = ''):
+        '''Return data as readable string, include children's data'''
+
+        # return front + self.AsStr() + '\n'\
+        #     + front + info.DeepObjStrHead + str(self.__dict__)
+        return front + self.AsStr()
 
     def AsStr(self):
         '''Return data as readable string'''
 
-        return 'Data ' + self.__class__.__name__ + ' ' + str(self.__dict__)
+        return 'Data ' + self.__class__.__name__
 
     def AsCode(self):
         '''Return data as code string'''
