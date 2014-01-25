@@ -78,6 +78,7 @@ def Submit(task, data = None):
 
     return info.LastData
 
+
 def SubmitDB(identifier, data = None, lock = False, target = ''):
     '''SubmitDB(identifier[, data[, lock: bool[, target: str]]])
     Read, submit and write'''

@@ -2,10 +2,10 @@
 
 # MAVC
 FullName = 'Maybe Another Version Control'
-Version = '1.0.0'
+Version = '1.2.0'
 
 # Check compatible version
-Compatible = lambda ver: ver == '1.0.0'
+Compatible = lambda ver: ver == '1.2.0'
 
 # Modules, initialize later
 Log = None

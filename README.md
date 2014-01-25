@@ -36,6 +36,7 @@ Add files and dirs:
     Progress: File bar
     Progress: Dir foo
     Dir foo
+        File bar
 
 Or scan dirs and files (you can also ignore some files):
 
@@ -43,20 +44,28 @@ Or scan dirs and files (you can also ignore some files):
     Progress: File baz
     Progress: File bar
     Progress: Dir foo
-    set([Dir foo])
+    set([Dir foo
+        File bar
+        File baz])
     >>> Walk('.', '.*z')
     Progress: File bar
     Progress: Dir foo
-    set([Dir foo])
+    set([Dir foo
+        File bar])
     >>> Walk('.', '.*b..')
     Progress: Dir foo
     set([Dir foo])
 
 Packages (not necessary):
 
+    >>> Walk('.')
+    ...
     >>> Package('pkg1', Last())
     Progress: Package pkg1
     Package pkg1
+        Dir foo
+            File bar
+            File baz
 
 `Last()` can be omitted. `Package('pkg1')` is ok.
 
@@ -66,6 +75,10 @@ Committing (in memory, not stored in the database):
     Hint: Time of commit is 2014-01-01T00:00:00.000000
     Progress: Commit update the pkg1
     Commit update the pkg1
+        Package pkg1
+            Dir foo
+                File bar
+                File baz
 
 If you want to set the timestamp manually:
 
@@ -73,6 +86,7 @@ If you want to set the timestamp manually:
     >>> CommitTimed('test', datetime.datetime.now().isoformat())
     Progress: Commit test
     Commit test
+        ...
 
 Create a task.
 
@@ -88,8 +102,11 @@ Commit and add to a task:
     Hint: Time of commit is 2014-01-01T00:00:00.000000
     Progress: Commit add files
     Commit add files
+        ...
     >>> Submit(t)
     Task release
+        Commit add files
+            ...
 
 Now you created some data objects. Then you can store them.
 
@@ -116,6 +133,8 @@ Restore data:
     Progress: Data restored 0x44444444
     Progress: Data restored 0x55555555
     Task release
+        Commit add files
+            ...
 
 `Pull()`, `Pull('0x55555555')` and `Pull(Last())` are the same here.
 
@@ -194,10 +213,17 @@ Run it:
      --------------------------
     >>> Last()
     Package pkg1
+        Dir foo
+            File bar
+            File baz
     >>> Commit('update the pkg1')
     Hint: Time of commit is 2014-01-01T00:00:00.000000
     Progress: Commit update the pkg1
     Commit update the pkg1
+        Package pkg1
+            Dir foo
+                File bar
+                File baz
     >>> Lock(Push())
     ...
     >>> Exit()
