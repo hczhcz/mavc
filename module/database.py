@@ -204,12 +204,17 @@ class PickleZlibDB(FileDB):
     # Calculate hash value, return result as string
     def _StrHash(self, data):
         try:
+            ver = data.DataVer
+            data.DataVer = None
+
             if info.StrongHash:
                 # Hex value of SHA-1 checksum
                 return hashlib.sha1(data).hexdigest()
             else:
                 # Hex value of Adler-32 checksum
                 return hex(zlib.adler32(data) & 0xffffffff)
+
+            data.DataVer = ver
         except:
             info.Log.InternalError('Zlib Adler-32 Hash failed')
 
